@@ -8,6 +8,7 @@
 
 import UIKit
 import Auth0
+import Alamofire
 
 class ViewController: UIViewController {
     
@@ -20,8 +21,6 @@ class ViewController: UIViewController {
     }
 
     @IBAction func signIn(_ sender: UIButton) {
-        
-        var signedIn : Bool
         
         Auth0
             .webAuth()
@@ -52,9 +51,29 @@ class ViewController: UIViewController {
                                 
                                 if let name = profile.name {
                                     self.userName = name
-                                    DispatchQueue.main.async {
-                                        self.performSegue(withIdentifier: "goToHome", sender: self)
+                                    
+                                    print("about to test API")
+                                    
+                                    //check if the user is already in our database
+                                    let parameters: Parameters = [
+                                        "email": name
+                                    ]
+                                    Alamofire.request("http://localhost:8080/api/user/onboardcheck", method: .post, parameters: parameters, encoding: JSONEncoding.default).responseJSON{
+                                        response in
+                                        if let status = response.response?.statusCode{
+                                            switch(status){
+                                            case 200:
+                                                print("User Exists")
+                                            default:
+                                                print("User Not Found")
+                                            }
+                                        }
                                     }
+                                    
+                                    
+                                    /*DispatchQueue.main.async {
+                                        self.performSegue(withIdentifier: "goToHome", sender: self)
+                                    }*/
                           
                                 }
                             case .failure(let error):

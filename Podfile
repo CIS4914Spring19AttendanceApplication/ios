@@ -7,4 +7,5 @@ target 'rollcall' do
 
   # Pods for rollcall
   pod 'Auth0', '~> 1.13'
+  pod 'Alamofire'
 end

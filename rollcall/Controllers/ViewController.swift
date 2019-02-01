@@ -15,6 +15,7 @@ class ViewController: UIViewController {
     let ONBOARD_URL = "http://localhost:8080/api/user/onboardcheck"
     
     var userName : String?
+    var firstName : String?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -60,8 +61,12 @@ class ViewController: UIViewController {
                                     Alamofire.request(self.ONBOARD_URL, method: .post, parameters: parameters, encoding: JSONEncoding.default).responseJSON{
                                         response in
                                         if let status = response.response?.statusCode{
+                                            print("status \(status)")
                                             switch(status){
                                             case 200:
+                                                let json = response.result.value as? [String: Any]
+                                                self.firstName = json?["first_name"] as? String
+                                                
                                                 //go to the home screen
                                                 DispatchQueue.main.async {
                                                     self.performSegue(withIdentifier: "goToHome", sender: self)
@@ -91,7 +96,7 @@ class ViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "goToHome"{
             let destinationVC = segue.destination as! HomeViewController
-            destinationVC.userPassedOver = userName
+            destinationVC.userPassedOver = firstName
             
         }
         

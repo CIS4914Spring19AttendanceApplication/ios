@@ -12,6 +12,8 @@ import Alamofire
 
 class ViewController: UIViewController {
     
+    let ONBOARD_URL = "http://localhost:8080/api/user/onboardcheck"
+    
     var userName : String?
 
     override func viewDidLoad() {
@@ -35,7 +37,6 @@ class ViewController: UIViewController {
                     // Do something with credentials e.g.: save them.
                     // Auth0 will automatically dismiss the login page
                     
-                    print("Successful Log in")
                     guard let accessToken = credentials.accessToken
                         else{
                             assert(false, "Google Analytics not configured correctly")
@@ -52,28 +53,29 @@ class ViewController: UIViewController {
                                 if let name = profile.name {
                                     self.userName = name
                                     
-                                    print("about to test API")
-                                    
                                     //check if the user is already in our database
                                     let parameters: Parameters = [
                                         "email": name
                                     ]
-                                    Alamofire.request("http://localhost:8080/api/user/onboardcheck", method: .post, parameters: parameters, encoding: JSONEncoding.default).responseJSON{
+                                    Alamofire.request(self.ONBOARD_URL, method: .post, parameters: parameters, encoding: JSONEncoding.default).responseJSON{
                                         response in
                                         if let status = response.response?.statusCode{
                                             switch(status){
                                             case 200:
-                                                print("User Exists")
+                                                //go to the home screen
+                                                DispatchQueue.main.async {
+                                                    self.performSegue(withIdentifier: "goToHome", sender: self)
+                                                }
+                                            case 404:
+                                                //go to the user registration screen
+                                                DispatchQueue.main.async {
+                                                    self.performSegue(withIdentifier: "goToRegistration", sender: self)
+                                                }
                                             default:
-                                                print("User Not Found")
+                                                print("Default")
                                             }
                                         }
                                     }
-                                    
-                                    
-                                    /*DispatchQueue.main.async {
-                                        self.performSegue(withIdentifier: "goToHome", sender: self)
-                                    }*/
                           
                                 }
                             case .failure(let error):
@@ -91,6 +93,11 @@ class ViewController: UIViewController {
             let destinationVC = segue.destination as! HomeViewController
             destinationVC.userPassedOver = userName
             
+        }
+        
+        if segue.identifier == "goToRegistration"{
+            let destinationVC = segue.destination as! RegisterViewController
+            destinationVC.emailPassedOver = userName
         }
     }
 }

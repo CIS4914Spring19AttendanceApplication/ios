@@ -9,11 +9,15 @@
 import UIKit
 
 class RegisterViewController: UIViewController {
-
+  
+    @IBOutlet weak var emailField: UITextField!
+    var emailPassedOver : String?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        emailField.placeholder = emailPassedOver
+        emailField.isUserInteractionEnabled = false
     }
     
 

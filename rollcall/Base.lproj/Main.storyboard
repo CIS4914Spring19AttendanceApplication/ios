@@ -47,7 +47,7 @@
                     </view>
                     <connections>
                         <segue destination="Bkw-wY-s41" kind="presentation" identifier="goToHome" modalPresentationStyle="fullScreen" modalTransitionStyle="crossDissolve" id="fwa-Qz-7Er"/>
-                        <segue destination="4II-8t-Kup" kind="show" id="90a-oG-aPf"/>
+                        <segue destination="4II-8t-Kup" kind="presentation" identifier="goToRegistration" animates="NO" id="90a-oG-aPf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -140,6 +140,9 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="3Ym-RB-fVs"/>
                     </view>
+                    <connections>
+                        <outlet property="emailField" destination="nJU-6q-hXf" id="3Lx-C3-XD7"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1mj-Lu-LNk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

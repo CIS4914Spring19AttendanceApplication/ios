@@ -7,9 +7,14 @@
 //
 
 import UIKit
+import Alamofire
 
 class RegisterViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
   
+    let REGISTER_URL = "http://localhost:8080/api/user/registeruser"
+    
+    @IBOutlet weak var warningLabel: UILabel!
+    @IBOutlet weak var errorLabel: UILabel!
     @IBOutlet weak var firstNameField: UITextField!
     @IBOutlet weak var lastNameField: UITextField!
     @IBOutlet weak var emailField: UITextField!
@@ -46,7 +51,48 @@ class RegisterViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
     
     
     @IBAction func register(_ sender: Any) {
+        //check that no fields are empty
+        if(!firstNameField.hasText){
+            warningLabel.isHidden = false
+            return
+        }
+        if(!lastNameField.hasText){
+            warningLabel.isHidden = false
+            return
+        }
         
+        //create the new user in our database
+        let parameters: Parameters = [
+            "email": emailPassedOver!,
+            "first_name": firstNameField.text!,
+            "last_name": lastNameField.text!,
+            "year": year!
+        ]
+        
+        Alamofire.request(self.REGISTER_URL, method: .post, parameters: parameters, encoding: JSONEncoding.default).responseJSON{
+            response in
+            if let status = response.response?.statusCode{
+                switch(status){
+                case 201:
+                    DispatchQueue.main.async {
+                        self.performSegue(withIdentifier: "goFromRegToHome", sender: self)
+                    }
+                case 400:
+                    self.warningLabel.isHidden = true
+                    self.errorLabel.isHidden = false
+                default:
+                    print("Default \(status)")
+                }
+            }
+        }
+    }
+    
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "goFromRegToHome"{
+            let destinationVC = segue.destination as! HomeViewController
+            destinationVC.userPassedOver = firstNameField.text
+        }
     }
     
     /*

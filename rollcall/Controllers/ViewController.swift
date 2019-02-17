@@ -12,7 +12,7 @@ import Alamofire
 
 class ViewController: UIViewController {
     
-    let ONBOARD_URL = "http://localhost:8080/api/user/onboardcheck"
+    let ONBOARD_URL = "http://localhost:8080/api/user/onboardcheck/"
     
     var userName : String?
     var firstName : String?
@@ -54,11 +54,18 @@ class ViewController: UIViewController {
                                 if let name = profile.name {
                                     self.userName = name
                                     
+                                    //MUST DELETE: FOR QR TESTING PURPOSES
+                                    if(name == "seboli@ufl.edu"){
+                                        //go to the home screen
+                                        DispatchQueue.main.async {
+                                            self.performSegue(withIdentifier: "goToHome", sender: self)
+                                        }
+                                    }
+                                    
+                                    
                                     //check if the user is already in our database
-                                    let parameters: Parameters = [
-                                        "email": name
-                                    ]
-                                    Alamofire.request(self.ONBOARD_URL, method: .post, parameters: parameters, encoding: JSONEncoding.default).responseJSON{
+                                    let completeURL = self.ONBOARD_URL + name
+                                    Alamofire.request(completeURL, method: .get, encoding: JSONEncoding.default).responseJSON{
                                         response in
                                         if let status = response.response?.statusCode{
                                             print("status \(status)")
@@ -96,8 +103,7 @@ class ViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "goToHome"{
             let destinationVC = segue.destination as! HomeViewController
-            destinationVC.userPassedOver = firstName
-            
+            destinationVC.userPassedOver = self.firstName
         }
         
         if segue.identifier == "goToRegistration"{

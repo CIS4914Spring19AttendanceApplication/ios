@@ -90,7 +90,8 @@ class RegisterViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "goFromRegToHome"{
-            let destinationVC = segue.destination as! HomeViewController
+            let barController = segue.destination as! UITabBarController
+            let destinationVC = barController.viewControllers![0] as! HomeViewController
             destinationVC.userPassedOver = firstNameField.text
         }
     }

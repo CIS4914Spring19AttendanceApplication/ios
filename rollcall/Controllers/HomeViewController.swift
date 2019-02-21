@@ -14,6 +14,9 @@ class HomeViewController: UIViewController, AVCaptureMetadataOutputObjectsDelega
     @IBOutlet weak var welcomeMessage: UILabel!
     @IBOutlet weak var directionLabel: UILabel!
     @IBOutlet weak var cameraView: UIImageView!
+    //@IBOutlet weak var welcomeMessage: UILabel!
+    //@IBOutlet weak var directionLabel: UILabel!
+    //@IBOutlet weak var cameraView: UIImageView!
     var userPassedOver : String?
     var captureSession = AVCaptureSession()
     var videoLayer: AVCaptureVideoPreviewLayer!
@@ -70,6 +73,13 @@ class HomeViewController: UIViewController, AVCaptureMetadataOutputObjectsDelega
             print(error)
             return
         }
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        //starts running the camera
+        captureSession.startRunning()
+        
+        directionLabel.text = "Scan the QR Code to Sign In!";
     }
     
     /*

@@ -12,7 +12,9 @@ import Alamofire
 
 class ViewController: UIViewController {
     
-    let ONBOARD_URL = "http://localhost:8080/api/user/onboardcheck/"
+    let ONBOARD_URL = "http://rollcall-api.herokuapp.com/api/user/onboardcheck/"
+    let sessionManager = SessionManager()
+    
     
     var userName : String?
     var firstName : String?
@@ -28,7 +30,7 @@ class ViewController: UIViewController {
         Auth0
             .webAuth()
             .scope("openid profile")
-            .audience("https://rollcall-app.auth0.com/userinfo")
+            .audience("https://rollcall-api.herokuapp.com")
             .start {
                 switch $0 {
                 case .failure(let error):
@@ -43,6 +45,7 @@ class ViewController: UIViewController {
                             assert(false, "Google Analytics not configured correctly")
                     }
                     print("1: \(accessToken)")
+                    self.sessionManager.adapter = AccessTokenAdapter(accessToken: accessToken)
                     
                     Auth0
                         .authentication()
@@ -54,18 +57,9 @@ class ViewController: UIViewController {
                                 if let name = profile.name {
                                     self.userName = name
                                     
-                                    //MUST DELETE: FOR QR TESTING PURPOSES
-                                    if(name == "seboli@ufl.edu"){
-                                        //go to the home screen
-                                        DispatchQueue.main.async {
-                                            self.performSegue(withIdentifier: "goToHome", sender: self)
-                                        }
-                                    }
-                                    
-                                    
                                     //check if the user is already in our database
                                     let completeURL = self.ONBOARD_URL + name
-                                    Alamofire.request(completeURL, method: .get, encoding: JSONEncoding.default).responseJSON{
+                                    self.sessionManager.request(completeURL, method: .get, encoding: JSONEncoding.default).responseJSON{
                                         response in
                                         if let status = response.response?.statusCode{
                                             print("status \(status)")
@@ -102,7 +96,8 @@ class ViewController: UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "goToHome"{
-            let destinationVC = segue.destination as! HomeViewController
+            let barController = segue.destination as! UITabBarController
+            let destinationVC = barController.viewControllers![0] as! HomeViewController
             destinationVC.userPassedOver = self.firstName
         }
         

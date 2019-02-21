@@ -62,56 +62,51 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" restorationIdentifier="welcome" text="Welcome" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nij-LY-bi3">
-                                <rect key="frame" x="16" y="115" width="343" height="30"/>
-                                <accessibility key="accessibilityConfiguration" identifier="welcome" label="welcome"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Tqt-7N-ZeG">
+                                <rect key="frame" x="0.0" y="174" width="375" height="319"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" secondItem="nij-LY-bi3" secondAttribute="height" multiplier="343:30" id="bsm-YQ-5Ec"/>
+                                    <constraint firstAttribute="height" constant="319" id="ROK-Mt-nLc"/>
                                 </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" restorationIdentifier="welcome" text="Welcome" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nij-LY-bi3">
+                                <rect key="frame" x="16" y="89" width="343" height="30"/>
+                                <accessibility key="accessibilityConfiguration" identifier="welcome" label="welcome"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Join an Organization or Sign In to an Event!" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ObQ-Of-vtr">
-                                <rect key="frame" x="16" y="467" width="343" height="98"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sign In to the Event!" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ObQ-Of-vtr">
+                                <rect key="frame" x="16" y="503" width="343" height="87"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" secondItem="ObQ-Of-vtr" secondAttribute="height" multiplier="7:2" id="Wq1-V7-6Hh"/>
+                                    <constraint firstAttribute="height" constant="87" id="adi-Z7-qjk"/>
+                                    <constraint firstAttribute="width" constant="344" id="dSd-in-sOX"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tD2-Pl-4ET">
-                                <rect key="frame" x="90" y="235" width="195" height="197"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="197" id="FT0-k0-1yN"/>
-                                    <constraint firstAttribute="width" constant="195" id="dm5-GV-GcP"/>
-                                </constraints>
-                                <state key="normal" title="Button" image="qr image"/>
-                                <connections>
-                                    <action selector="qrButton:" destination="Bkw-wY-s41" eventType="touchUpInside" id="rOu-dN-84B"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="tD2-Pl-4ET" firstAttribute="centerX" secondItem="AV5-qp-l5o" secondAttribute="centerX" id="0A1-Fu-M3W"/>
-                            <constraint firstItem="ObQ-Of-vtr" firstAttribute="top" secondItem="tD2-Pl-4ET" secondAttribute="bottom" constant="35" id="5nn-eo-7pd"/>
-                            <constraint firstItem="tD2-Pl-4ET" firstAttribute="centerX" secondItem="AV5-qp-l5o" secondAttribute="centerX" id="AxT-cG-QXi"/>
-                            <constraint firstItem="nij-LY-bi3" firstAttribute="leading" secondItem="AV5-qp-l5o" secondAttribute="leading" constant="16" id="Daz-M9-NgN"/>
-                            <constraint firstItem="tD2-Pl-4ET" firstAttribute="centerY" secondItem="AV5-qp-l5o" secondAttribute="centerY" id="Fmh-Gy-vsr"/>
-                            <constraint firstItem="nij-LY-bi3" firstAttribute="centerX" secondItem="AV5-qp-l5o" secondAttribute="centerX" id="Izi-cU-Vjc"/>
-                            <constraint firstItem="tD2-Pl-4ET" firstAttribute="top" secondItem="nij-LY-bi3" secondAttribute="bottom" constant="90" id="MG0-T8-oq9"/>
-                            <constraint firstItem="tD2-Pl-4ET" firstAttribute="centerY" secondItem="AV5-qp-l5o" secondAttribute="centerY" id="YOI-e6-Bm3"/>
-                            <constraint firstItem="ObQ-Of-vtr" firstAttribute="centerX" secondItem="AV5-qp-l5o" secondAttribute="centerX" id="e8E-Sj-0Ut"/>
-                            <constraint firstItem="wg2-Eh-xFS" firstAttribute="trailing" secondItem="nij-LY-bi3" secondAttribute="trailing" constant="16" id="jjb-Dh-i2x"/>
-                            <constraint firstItem="ObQ-Of-vtr" firstAttribute="centerX" secondItem="AV5-qp-l5o" secondAttribute="centerX" id="tat-TL-ON4"/>
-                            <constraint firstItem="ObQ-Of-vtr" firstAttribute="leading" secondItem="wg2-Eh-xFS" secondAttribute="leading" constant="16" id="x8W-VL-HDK"/>
-                            <constraint firstItem="wg2-Eh-xFS" firstAttribute="trailing" secondItem="ObQ-Of-vtr" secondAttribute="trailing" constant="16" id="xFZ-gP-4LG"/>
+                            <constraint firstItem="wg2-Eh-xFS" firstAttribute="trailing" secondItem="ObQ-Of-vtr" secondAttribute="trailing" constant="16" id="0Gu-h1-aWM"/>
+                            <constraint firstItem="Tqt-7N-ZeG" firstAttribute="leading" secondItem="AV5-qp-l5o" secondAttribute="leading" id="Qnj-t2-Q9M"/>
+                            <constraint firstItem="nij-LY-bi3" firstAttribute="leading" secondItem="wg2-Eh-xFS" secondAttribute="leading" constant="16" id="Qp4-a0-FAY"/>
+                            <constraint firstItem="Tqt-7N-ZeG" firstAttribute="centerY" secondItem="AV5-qp-l5o" secondAttribute="centerY" id="VV6-x1-v5J"/>
+                            <constraint firstItem="nij-LY-bi3" firstAttribute="centerX" secondItem="AV5-qp-l5o" secondAttribute="centerX" id="We3-gF-oFk"/>
+                            <constraint firstItem="Tqt-7N-ZeG" firstAttribute="top" secondItem="nij-LY-bi3" secondAttribute="bottom" constant="55" id="YXi-g6-S2X"/>
+                            <constraint firstItem="ObQ-Of-vtr" firstAttribute="top" secondItem="Tqt-7N-ZeG" secondAttribute="bottom" constant="10" id="Ym6-Cf-6h0"/>
+                            <constraint firstItem="ObQ-Of-vtr" firstAttribute="centerX" secondItem="AV5-qp-l5o" secondAttribute="centerX" id="ZPK-Zz-ZIf"/>
+                            <constraint firstItem="wg2-Eh-xFS" firstAttribute="trailing" secondItem="nij-LY-bi3" secondAttribute="trailing" constant="16" id="bmo-T1-JSv"/>
+                            <constraint firstItem="ObQ-Of-vtr" firstAttribute="centerX" secondItem="AV5-qp-l5o" secondAttribute="centerX" id="cGi-0M-KKa"/>
+                            <constraint firstItem="Tqt-7N-ZeG" firstAttribute="trailing" secondItem="wg2-Eh-xFS" secondAttribute="trailing" id="myo-Qz-3rX"/>
+                            <constraint firstItem="Tqt-7N-ZeG" firstAttribute="leading" secondItem="wg2-Eh-xFS" secondAttribute="leading" id="nND-3F-gHF"/>
+                            <constraint firstItem="ObQ-Of-vtr" firstAttribute="leading" secondItem="wg2-Eh-xFS" secondAttribute="leading" constant="16" id="oqP-zx-bMf"/>
+                            <constraint firstItem="Tqt-7N-ZeG" firstAttribute="centerX" secondItem="AV5-qp-l5o" secondAttribute="centerX" id="vOe-T0-d4M"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="wg2-Eh-xFS"/>
                     </view>
                     <connections>
+                        <outlet property="cameraView" destination="Tqt-7N-ZeG" id="6FS-KC-xEc"/>
                         <outlet property="directionLabel" destination="ObQ-Of-vtr" id="S0L-BG-1j7"/>
                         <outlet property="welcomeMessage" destination="nij-LY-bi3" id="qA6-9I-OY0"/>
                     </connections>
@@ -296,7 +291,6 @@
     </scenes>
     <resources>
         <image name="logo" width="500" height="500"/>
-        <image name="qr image" width="500" height="500"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="fwa-Qz-7Er"/>

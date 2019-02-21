@@ -13,11 +13,31 @@ class HomeViewController: UIViewController, AVCaptureMetadataOutputObjectsDelega
 
     @IBOutlet weak var welcomeMessage: UILabel!
     @IBOutlet weak var directionLabel: UILabel!
+    @IBOutlet weak var cameraView: UIImageView!
     var userPassedOver : String?
     var captureSession = AVCaptureSession()
     var videoLayer: AVCaptureVideoPreviewLayer!
-
-    @IBAction func qrButton(_ sender: UIButton) {
+    let captureMetadataOutput = AVCaptureMetadataOutput()
+    
+    func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects: [AVMetadataObject], from connection: AVCaptureConnection){
+        
+        //get the metadata object
+        let metadataObj = metadataObjects[0] as! AVMetadataMachineReadableCodeObject
+        
+        if metadataObj.type == AVMetadataObject.ObjectType.qr{
+            
+            if metadataObj.stringValue != nil{
+                captureSession.stopRunning()
+                directionLabel.text = "Signed in to \(metadataObj.stringValue ?? "an event")!";
+            }
+        }
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        welcomeMessage.text = "Welcome, \(userPassedOver ?? "friend")!"
+        
         //finds the device's camera
         let deviceDiscoverySession = AVCaptureDevice.DiscoverySession(deviceTypes: [.builtInWideAngleCamera], mediaType: AVMediaType.video, position: .back)
         
@@ -30,13 +50,15 @@ class HomeViewController: UIViewController, AVCaptureMetadataOutputObjectsDelega
             let input = try AVCaptureDeviceInput(device: captureDevice)
             captureSession.addInput(input)
             
-            let captureMetadataOutput = AVCaptureMetadataOutput()
+            //let captureMetadataOutput = AVCaptureMetadataOutput()
             captureSession.addOutput(captureMetadataOutput)
             
             videoLayer = AVCaptureVideoPreviewLayer(session: captureSession)
             videoLayer?.videoGravity = AVLayerVideoGravity.resizeAspectFill
-            videoLayer?.frame = view.layer.bounds
-            view.layer.addSublayer(videoLayer!)
+            DispatchQueue.main.async{
+                self.videoLayer?.frame = self.cameraView.bounds
+                self.cameraView.layer.addSublayer(self.videoLayer!)
+            }
             
             captureMetadataOutput.setMetadataObjectsDelegate(self, queue: DispatchQueue.main)
             captureMetadataOutput.metadataObjectTypes = captureMetadataOutput.availableMetadataObjectTypes
@@ -49,30 +71,6 @@ class HomeViewController: UIViewController, AVCaptureMetadataOutputObjectsDelega
             return
         }
     }
-    
-    func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects: [AVMetadataObject], from connection: AVCaptureConnection){
-        
-        //get the metadata object
-        let metadataObj = metadataObjects[0] as! AVMetadataMachineReadableCodeObject
-        
-        if metadataObj.type == AVMetadataObject.ObjectType.qr{
-            
-            if metadataObj.stringValue != nil{
-                //returns to the home screen
-                videoLayer.removeFromSuperlayer()
-                captureSession.stopRunning()
-                directionLabel.text = "Signed in to \(metadataObj.stringValue ?? "an event")!";
-            }
-        }
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        welcomeMessage.text = "Welcome, \(userPassedOver ?? "friend")!"
-    }
-    
-    
     
     /*
     // MARK: - Navigation

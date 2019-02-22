@@ -66,7 +66,6 @@
 		31D1613A21F8D20B00DE7A5E = {
 			isa = PBXGroup;
 			children = (
-				31875CC1221E4DA1009C3E3C /* rollcall.xcdatamodeld */,
 				31D1614521F8D20B00DE7A5E /* rollcall */,
 				31D1614421F8D20B00DE7A5E /* Products */,
 				7790D8B9790CF661005CF7FA /* Pods */,
@@ -85,6 +84,7 @@
 		31D1614521F8D20B00DE7A5E /* rollcall */ = {
 			isa = PBXGroup;
 			children = (
+				31875CC1221E4DA1009C3E3C /* rollcall.xcdatamodeld */,
 				31BE122C220211E400666475 /* Controllers */,
 				31D1614621F8D20B00DE7A5E /* AppDelegate.swift */,
 				31D1614A21F8D20B00DE7A5E /* Main.storyboard */,

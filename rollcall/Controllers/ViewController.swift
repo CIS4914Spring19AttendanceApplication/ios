@@ -16,13 +16,13 @@ class ViewController: UIViewController {
     let sessionManager = SessionManager()
     
     
-    var userName : String?
+    var email : String?
     var firstName : String?
-
+    var accessToken : String?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        
     }
 
     @IBAction func signIn(_ sender: UIButton) {
@@ -55,7 +55,7 @@ class ViewController: UIViewController {
                             case .success(let profile):
                                 
                                 if let name = profile.name {
-                                    self.userName = name
+                                    self.email = name
                                     
                                     //check if the user is already in our database
                                     let completeURL = self.ONBOARD_URL + name
@@ -99,11 +99,14 @@ class ViewController: UIViewController {
             let barController = segue.destination as! UITabBarController
             let destinationVC = barController.viewControllers![0] as! HomeViewController
             destinationVC.userPassedOver = self.firstName
+            destinationVC.email = self.email
+            destinationVC.accessToken = self.accessToken
         }
         
         if segue.identifier == "goToRegistration"{
             let destinationVC = segue.destination as! RegisterViewController
-            destinationVC.emailPassedOver = userName
+            destinationVC.emailPassedOver = self.email
+            destinationVC.accessToken = self.accessToken
         }
     }
 }

@@ -14,10 +14,10 @@ class HomeViewController: UIViewController, AVCaptureMetadataOutputObjectsDelega
     @IBOutlet weak var welcomeMessage: UILabel!
     @IBOutlet weak var directionLabel: UILabel!
     @IBOutlet weak var cameraView: UIImageView!
-    //@IBOutlet weak var welcomeMessage: UILabel!
-    //@IBOutlet weak var directionLabel: UILabel!
-    //@IBOutlet weak var cameraView: UIImageView!
     var userPassedOver : String?
+    var accessToken : String?
+    var email : String?
+    
     var captureSession = AVCaptureSession()
     var videoLayer: AVCaptureVideoPreviewLayer!
     let captureMetadataOutput = AVCaptureMetadataOutput()
@@ -40,7 +40,7 @@ class HomeViewController: UIViewController, AVCaptureMetadataOutputObjectsDelega
         super.viewDidLoad()
         
         welcomeMessage.text = "Welcome, \(userPassedOver ?? "friend")!"
-        
+    
         //finds the device's camera
         let deviceDiscoverySession = AVCaptureDevice.DiscoverySession(deviceTypes: [.builtInWideAngleCamera], mediaType: AVMediaType.video, position: .back)
         

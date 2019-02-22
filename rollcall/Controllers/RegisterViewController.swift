@@ -12,6 +12,7 @@ import Alamofire
 class RegisterViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
   
     let REGISTER_URL = "http://localhost:8080/api/user/registeruser"
+    let sessionManager = SessionManager()
     
     @IBOutlet weak var warningLabel: UILabel!
     @IBOutlet weak var errorLabel: UILabel!
@@ -19,6 +20,7 @@ class RegisterViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
     @IBOutlet weak var lastNameField: UITextField!
     @IBOutlet weak var emailField: UITextField!
     var emailPassedOver : String?
+    var accessToken : String?
     @IBOutlet weak var yearPicker: UIPickerView!
     let yearArr = ["Freshman", "Sophomore", "Junior", "Senior", "Graduate"]
     var year : String?
@@ -51,6 +53,8 @@ class RegisterViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
     
     
     @IBAction func register(_ sender: Any) {
+        self.sessionManager.adapter = AccessTokenAdapter(accessToken: accessToken!)
+        
         //check that no fields are empty
         if(!firstNameField.hasText){
             warningLabel.isHidden = false
@@ -69,7 +73,7 @@ class RegisterViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
             "year": year!
         ]
         
-        Alamofire.request(self.REGISTER_URL, method: .post, parameters: parameters, encoding: JSONEncoding.default).responseJSON{
+        self.sessionManager.request(self.REGISTER_URL, method: .post, parameters: parameters, encoding: JSONEncoding.default).responseJSON{
             response in
             if let status = response.response?.statusCode{
                 switch(status){
@@ -93,6 +97,8 @@ class RegisterViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
             let barController = segue.destination as! UITabBarController
             let destinationVC = barController.viewControllers![0] as! HomeViewController
             destinationVC.userPassedOver = firstNameField.text
+            destinationVC.email = self.emailPassedOver
+            destinationVC.accessToken = self.accessToken
         }
     }
     

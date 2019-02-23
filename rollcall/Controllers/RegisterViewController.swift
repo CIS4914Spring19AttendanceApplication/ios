@@ -11,14 +11,17 @@ import Alamofire
 
 class RegisterViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
   
+    //let REGISTER_URL = "http://rollcall-api.herokuapp.com/api/user/registeruser"
     let REGISTER_URL = "http://localhost:8080/api/user/registeruser"
     let sessionManager = SessionManager()
     
     @IBOutlet weak var warningLabel: UILabel!
     @IBOutlet weak var errorLabel: UILabel!
+    @IBOutlet weak var phoneWarningLabel: UILabel!
     @IBOutlet weak var firstNameField: UITextField!
     @IBOutlet weak var lastNameField: UITextField!
     @IBOutlet weak var emailField: UITextField!
+    @IBOutlet weak var phoneField: UITextField!
     var emailPassedOver : String?
     var accessToken : String?
     @IBOutlet weak var yearPicker: UIPickerView!
@@ -51,6 +54,12 @@ class RegisterViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
         yearPicker.dataSource = self;
     }
     
+    func validate(value: String) -> Bool {
+        let PHONE_REGEX = "^\\d{3}-\\d{3}-\\d{4}$"
+        let phoneTest = NSPredicate(format: "SELF MATCHES %@", PHONE_REGEX)
+        let result =  phoneTest.evaluate(with: value)
+        return result
+    }
     
     @IBAction func register(_ sender: Any) {
         self.sessionManager.adapter = AccessTokenAdapter(accessToken: accessToken!)
@@ -58,10 +67,24 @@ class RegisterViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
         //check that no fields are empty
         if(!firstNameField.hasText){
             warningLabel.isHidden = false
+            phoneWarningLabel.isHidden = true
             return
         }
         if(!lastNameField.hasText){
             warningLabel.isHidden = false
+            phoneWarningLabel.isHidden = true
+            return
+        }
+        if(!phoneField.hasText){
+            warningLabel.isHidden = false
+            phoneWarningLabel.isHidden = true
+            return
+        }
+        
+        //check whether the phone number is formatted properly
+        if(!validate(value: phoneField.text!)){
+            warningLabel.isHidden = true;
+            phoneWarningLabel.isHidden = false
             return
         }
         
@@ -70,6 +93,7 @@ class RegisterViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
             "email": emailPassedOver!,
             "first_name": firstNameField.text!,
             "last_name": lastNameField.text!,
+            "phone": phoneField.text!,
             "year": year!
         ]
         
@@ -83,6 +107,7 @@ class RegisterViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
                     }
                 case 400:
                     self.warningLabel.isHidden = true
+                    self.phoneWarningLabel.isHidden = true
                     self.errorLabel.isHidden = false
                 default:
                     print("Default \(status)")

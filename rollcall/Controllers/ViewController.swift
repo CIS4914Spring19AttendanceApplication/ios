@@ -13,12 +13,11 @@ import Alamofire
 class ViewController: UIViewController {
     
     let ONBOARD_URL = "http://rollcall-api.herokuapp.com/api/user/onboardcheck/"
+    //let ONBOARD_URL = "http://localhost:8080/api/user/onboardcheck/"
     let sessionManager = SessionManager()
     
-    
-    var email : String?
-    var firstName : String?
     var accessToken : String?
+    var userData : [String] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,6 +45,7 @@ class ViewController: UIViewController {
                     }
                     print("1: \(accessToken)")
                     self.sessionManager.adapter = AccessTokenAdapter(accessToken: accessToken)
+                    self.accessToken = accessToken
                     
                     Auth0
                         .authentication()
@@ -55,7 +55,7 @@ class ViewController: UIViewController {
                             case .success(let profile):
                                 
                                 if let name = profile.name {
-                                    self.email = name
+                                    self.userData.append(name)
                                     
                                     //check if the user is already in our database
                                     let completeURL = self.ONBOARD_URL + name
@@ -66,7 +66,9 @@ class ViewController: UIViewController {
                                             switch(status){
                                             case 200:
                                                 let json = response.result.value as? [String: Any]
-                                                self.firstName = json?["first_name"] as? String
+                                                self.userData.append(json?["first_name"] as! String)
+                                                self.userData.append(json?["last_name"] as! String)
+                                                self.userData.append(json?["phone"] as? String ?? "" )
                                                 
                                                 //go to the home screen
                                                 DispatchQueue.main.async {
@@ -98,14 +100,13 @@ class ViewController: UIViewController {
         if segue.identifier == "goToHome"{
             let barController = segue.destination as! UITabBarController
             let destinationVC = barController.viewControllers![0] as! HomeViewController
-            destinationVC.userPassedOver = self.firstName
-            destinationVC.email = self.email
+            destinationVC.userData = self.userData
             destinationVC.accessToken = self.accessToken
         }
         
         if segue.identifier == "goToRegistration"{
             let destinationVC = segue.destination as! RegisterViewController
-            destinationVC.emailPassedOver = self.email
+            destinationVC.emailPassedOver = self.userData[0]
             destinationVC.accessToken = self.accessToken
         }
     }

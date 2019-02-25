@@ -20,6 +20,7 @@ class AccessTokenAdapter: RequestAdapter {
         var urlRequest = urlRequest
         
         if let urlString = urlRequest.url?.absoluteString, urlString.hasPrefix("http://rollcall-api.herokuapp.com") {
+        //if let urlString = urlRequest.url?.absoluteString, urlString.hasPrefix("http://localhost:8080/"){
             urlRequest.setValue("Bearer " + accessToken, forHTTPHeaderField: "Authorization")
         }
         

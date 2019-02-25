@@ -70,77 +70,159 @@
             </objects>
             <point key="canvasLocation" x="2665" y="385"/>
         </scene>
+        <!--Sign In View Controller-->
+        <scene sceneID="D6u-aQ-SAi">
+            <objects>
+                <viewController id="t2m-RA-oTo" customClass="SignInViewController" customModule="rollcall" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Rfo-OB-hwW">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <visualEffectView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lZw-PD-VJ9">
+                                <rect key="frame" x="67" y="269" width="240" height="128"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" insetsLayoutMarginsFromSafeArea="NO" id="uUH-43-Ldv">
+                                    <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DW5-dP-FXE">
+                                            <rect key="frame" x="-68" y="-260" width="375" height="647"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <connections>
+                                                <action selector="exit:" destination="t2m-RA-oTo" eventType="touchUpInside" id="jhV-lg-7zT"/>
+                                            </connections>
+                                        </button>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Successfully Signed In" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="7" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z1I-xn-dOb">
+                                            <rect key="frame" x="-8" y="-85" width="255" height="297"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </view>
+                                <blurEffect style="light"/>
+                            </visualEffectView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="Lb0-nP-ov0"/>
+                    </view>
+                    <connections>
+                        <outlet property="resultLabel" destination="z1I-xn-dOb" id="9SQ-Fd-5GT"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="LnP-Ln-znZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3446" y="-63"/>
+        </scene>
         <!--Sign In-->
         <scene sceneID="qDX-sF-073">
             <objects>
                 <viewController id="xit-QG-hJG" customClass="HomeViewController" customModule="rollcall" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="zs5-xL-Qda">
+                    <view key="view" contentMode="scaleToFill" id="tZu-74-bsx">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Roll Call requires access to your device's camera. Please enable access in your device's application settings. Thank you!" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xCR-cz-3sV">
-                                <rect key="frame" x="45" y="293" width="285" height="81.5"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Scan the QR Code to Sign In!" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ax1-jy-rxl">
-                                <rect key="frame" x="16" y="503" width="343" height="87"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BDU-1E-6Gy">
+                                <rect key="frame" x="16" y="91" width="343" height="55"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="87" id="hKp-eT-QFV"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="MJv-4y-nIm">
-                                <rect key="frame" x="0.0" y="174" width="375" height="319"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="319" id="3Ba-A0-kNa"/>
-                                </constraints>
-                            </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" restorationIdentifier="welcome" text="Welcome" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a0c-fB-1AP">
-                                <rect key="frame" x="15" y="67" width="344" height="79"/>
-                                <accessibility key="accessibilityConfiguration" identifier="welcome" label="welcome"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="79" id="m7q-oz-7dg"/>
+                                    <constraint firstAttribute="height" constant="55" id="Cln-vc-rcA"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VZf-AY-M0z">
+                                <rect key="frame" x="16" y="270.5" width="343" height="126"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="126" id="rew-22-508"/>
+                                </constraints>
+                                <string key="text">Roll Call requires access to your device's camera. Please allow Roll Call to access your camera through your device's settings. Thank you!</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Scan the QR code to sign in!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="460-l2-onK">
+                                <rect key="frame" x="16" y="504" width="343" height="27.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="23"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ISE-BM-hsC">
+                                <rect key="frame" x="0.0" y="217" width="375" height="233"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="xCR-cz-3sV" firstAttribute="centerY" secondItem="zs5-xL-Qda" secondAttribute="centerY" id="9uJ-Lh-aae"/>
-                            <constraint firstItem="ax1-jy-rxl" firstAttribute="top" secondItem="MJv-4y-nIm" secondAttribute="bottom" constant="10" id="AI3-Br-j9X"/>
-                            <constraint firstItem="MJv-4y-nIm" firstAttribute="centerY" secondItem="zs5-xL-Qda" secondAttribute="centerY" id="Lik-VE-ALO"/>
-                            <constraint firstItem="ax1-jy-rxl" firstAttribute="leading" secondItem="5YI-MR-gma" secondAttribute="leading" constant="16" id="Myd-KT-Dak"/>
-                            <constraint firstItem="5YI-MR-gma" firstAttribute="trailing" secondItem="a0c-fB-1AP" secondAttribute="trailing" constant="16" id="QHY-rB-G3X"/>
-                            <constraint firstItem="xCR-cz-3sV" firstAttribute="leading" secondItem="5YI-MR-gma" secondAttribute="leading" constant="45" id="UyS-Xf-hXV"/>
-                            <constraint firstItem="a0c-fB-1AP" firstAttribute="leading" secondItem="5YI-MR-gma" secondAttribute="leading" constant="15" id="ZA3-vZ-qo0"/>
-                            <constraint firstItem="5YI-MR-gma" firstAttribute="trailing" secondItem="xCR-cz-3sV" secondAttribute="trailing" constant="45" id="aSW-JT-S14"/>
-                            <constraint firstItem="MJv-4y-nIm" firstAttribute="top" secondItem="a0c-fB-1AP" secondAttribute="bottom" constant="28" id="bry-1Z-jZ3"/>
-                            <constraint firstItem="5YI-MR-gma" firstAttribute="trailing" secondItem="ax1-jy-rxl" secondAttribute="trailing" constant="16" id="d19-rJ-0iu"/>
-                            <constraint firstItem="xCR-cz-3sV" firstAttribute="centerY" secondItem="zs5-xL-Qda" secondAttribute="centerY" id="d8d-a7-4Mr"/>
-                            <constraint firstItem="MJv-4y-nIm" firstAttribute="trailing" secondItem="5YI-MR-gma" secondAttribute="trailing" id="eOZ-4A-qbt"/>
-                            <constraint firstItem="MJv-4y-nIm" firstAttribute="leading" secondItem="zs5-xL-Qda" secondAttribute="leading" id="gKJ-MM-44q"/>
-                            <constraint firstItem="xCR-cz-3sV" firstAttribute="centerX" secondItem="zs5-xL-Qda" secondAttribute="centerX" id="hfN-mQ-Rn1"/>
-                            <constraint firstItem="MJv-4y-nIm" firstAttribute="centerX" secondItem="zs5-xL-Qda" secondAttribute="centerX" id="tDW-0F-sJM"/>
-                            <constraint firstItem="xCR-cz-3sV" firstAttribute="centerX" secondItem="zs5-xL-Qda" secondAttribute="centerX" id="uld-jy-fU5"/>
+                            <constraint firstItem="460-l2-onK" firstAttribute="centerX" secondItem="tZu-74-bsx" secondAttribute="centerX" id="2M8-xO-2Sf"/>
+                            <constraint firstItem="VZf-AY-M0z" firstAttribute="centerX" secondItem="tZu-74-bsx" secondAttribute="centerX" id="5yl-Z8-VfG"/>
+                            <constraint firstItem="ISE-BM-hsC" firstAttribute="centerX" secondItem="tZu-74-bsx" secondAttribute="centerX" id="9TB-Gd-62o"/>
+                            <constraint firstItem="460-l2-onK" firstAttribute="top" secondItem="ISE-BM-hsC" secondAttribute="bottom" constant="54" id="AaF-iy-knl"/>
+                            <constraint firstItem="ISE-BM-hsC" firstAttribute="centerY" secondItem="tZu-74-bsx" secondAttribute="centerY" id="DOg-jC-vLD"/>
+                            <constraint firstItem="VZf-AY-M0z" firstAttribute="leading" secondItem="QTx-km-yKg" secondAttribute="leading" constant="16" id="E47-Yd-M90"/>
+                            <constraint firstItem="BDU-1E-6Gy" firstAttribute="leading" secondItem="QTx-km-yKg" secondAttribute="leading" constant="16" id="J94-eT-fPp"/>
+                            <constraint firstItem="BDU-1E-6Gy" firstAttribute="centerX" secondItem="tZu-74-bsx" secondAttribute="centerX" id="JAG-JY-mId"/>
+                            <constraint firstItem="VZf-AY-M0z" firstAttribute="centerY" secondItem="tZu-74-bsx" secondAttribute="centerY" id="Mx7-ez-pPw"/>
+                            <constraint firstItem="QTx-km-yKg" firstAttribute="trailing" secondItem="BDU-1E-6Gy" secondAttribute="trailing" constant="16" id="OeC-Bw-oSC"/>
+                            <constraint firstItem="QTx-km-yKg" firstAttribute="trailing" secondItem="460-l2-onK" secondAttribute="trailing" constant="16" id="g2v-5s-L4t"/>
+                            <constraint firstItem="ISE-BM-hsC" firstAttribute="leading" secondItem="tZu-74-bsx" secondAttribute="leading" id="hR8-gG-1gs"/>
+                            <constraint firstItem="QTx-km-yKg" firstAttribute="trailing" secondItem="VZf-AY-M0z" secondAttribute="trailing" constant="16" id="r1O-n7-irz"/>
+                            <constraint firstItem="460-l2-onK" firstAttribute="leading" secondItem="QTx-km-yKg" secondAttribute="leading" constant="16" id="s1c-Da-I76"/>
+                            <constraint firstItem="BDU-1E-6Gy" firstAttribute="top" secondItem="QTx-km-yKg" secondAttribute="top" constant="71" id="vFW-2d-GDt"/>
+                            <constraint firstItem="ISE-BM-hsC" firstAttribute="top" secondItem="BDU-1E-6Gy" secondAttribute="bottom" constant="71" id="yCc-Ww-ih7"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="5YI-MR-gma"/>
+                        <viewLayoutGuide key="safeArea" id="QTx-km-yKg"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Sign In" image="qr_code" id="Lhf-ZJ-zH2"/>
                     <connections>
-                        <outlet property="cameraView" destination="MJv-4y-nIm" id="2Qe-YX-68s"/>
-                        <outlet property="directionLabel" destination="ax1-jy-rxl" id="BZS-TH-Dg0"/>
-                        <outlet property="welcomeMessage" destination="a0c-fB-1AP" id="aPy-dl-Ajj"/>
+                        <outlet property="cameraView" destination="ISE-BM-hsC" id="gt4-yB-3kd"/>
+                        <outlet property="directionLabel" destination="460-l2-onK" id="f2I-jP-wF5"/>
+                        <outlet property="welcomeMessage" destination="BDU-1E-6Gy" id="tnD-bY-m6G"/>
+                        <segue destination="dCG-Xg-bOg" kind="presentation" identifier="additionalQuestions" modalPresentationStyle="overCurrentContext" id="psh-lp-pNX"/>
+                        <segue destination="t2m-RA-oTo" kind="presentation" identifier="signedIn" id="Uhz-iF-TUi"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jbF-xe-596" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2666" y="-295"/>
+            <point key="canvasLocation" x="2664.8000000000002" y="-295.50224887556226"/>
+        </scene>
+        <!--Additional Fields View Controller-->
+        <scene sceneID="xjo-1T-GDB">
+            <objects>
+                <viewController id="dCG-Xg-bOg" customClass="AdditionalFieldsViewController" customModule="rollcall" customModuleProvider="target" sceneMemberID="viewController">
+                    <visualEffectView key="view" opaque="NO" contentMode="scaleToFill" id="R1H-cW-5r1">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="RY6-rn-YIw">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <subviews>
+                                <tableView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="vGD-Qj-2WR">
+                                    <rect key="frame" x="50" y="269" width="275" height="128"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <connections>
+                                        <outlet property="dataSource" destination="dCG-Xg-bOg" id="LnP-F1-Phb"/>
+                                        <outlet property="delegate" destination="dCG-Xg-bOg" id="b9K-8W-Lp8"/>
+                                    </connections>
+                                </tableView>
+                            </subviews>
+                            <constraints>
+                                <constraint firstItem="vGD-Qj-2WR" firstAttribute="leading" secondItem="RY6-rn-YIw" secondAttribute="leading" constant="50" id="GgO-dq-TdO"/>
+                                <constraint firstAttribute="trailing" secondItem="vGD-Qj-2WR" secondAttribute="trailing" constant="50" id="X8i-dA-wKp"/>
+                                <constraint firstItem="vGD-Qj-2WR" firstAttribute="centerY" secondItem="RY6-rn-YIw" secondAttribute="centerY" id="cHt-Zq-xFd"/>
+                                <constraint firstItem="vGD-Qj-2WR" firstAttribute="centerX" secondItem="RY6-rn-YIw" secondAttribute="centerX" id="vMh-Xj-ilw"/>
+                            </constraints>
+                        </view>
+                        <blurEffect style="light"/>
+                    </visualEffectView>
+                    <connections>
+                        <outlet property="questionTable" destination="vGD-Qj-2WR" id="CkU-eQ-nGj"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="waR-2B-44s" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3445.5999999999999" y="-717.39130434782612"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="In9-v9-x8p">

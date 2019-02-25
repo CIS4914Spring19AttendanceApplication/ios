@@ -23,6 +23,7 @@ class RegisterViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
     @IBOutlet weak var emailField: UITextField!
     @IBOutlet weak var phoneField: UITextField!
     var emailPassedOver : String?
+    var userData : [String] = []
     var accessToken : String?
     @IBOutlet weak var yearPicker: UIPickerView!
     let yearArr = ["Freshman", "Sophomore", "Junior", "Senior", "Graduate"]
@@ -102,6 +103,12 @@ class RegisterViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
             if let status = response.response?.statusCode{
                 switch(status){
                 case 201:
+                    //save the data
+                    self.userData.append(self.emailPassedOver!)
+                    self.userData.append(self.firstNameField.text!)
+                    self.userData.append(self.lastNameField.text!)
+                    self.userData.append(self.phoneField.text!)
+                    
                     DispatchQueue.main.async {
                         self.performSegue(withIdentifier: "goFromRegToHome", sender: self)
                     }
@@ -121,8 +128,7 @@ class RegisterViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
         if segue.identifier == "goFromRegToHome"{
             let barController = segue.destination as! UITabBarController
             let destinationVC = barController.viewControllers![0] as! HomeViewController
-            destinationVC.userPassedOver = firstNameField.text
-            destinationVC.email = self.emailPassedOver
+            destinationVC.userData = self.userData
             destinationVC.accessToken = self.accessToken
         }
     }

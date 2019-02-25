@@ -16,7 +16,7 @@ class SignInViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        resultLabel.text = res
+        resultLabel.text = self.res
     }
     
     @IBAction func exit(_ sender: Any) {

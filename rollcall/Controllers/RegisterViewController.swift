@@ -63,8 +63,6 @@ class RegisterViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
     }
     
     @IBAction func register(_ sender: Any) {
-        self.sessionManager.adapter = AccessTokenAdapter(accessToken: accessToken!)
-        
         //check that no fields are empty
         if(!firstNameField.hasText){
             warningLabel.isHidden = false
@@ -98,6 +96,7 @@ class RegisterViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
             "year": year!
         ]
         
+        self.sessionManager.adapter = AccessTokenAdapter(accessToken: accessToken!)
         self.sessionManager.request(self.REGISTER_URL, method: .post, parameters: parameters, encoding: JSONEncoding.default).responseJSON{
             response in
             if let status = response.response?.statusCode{

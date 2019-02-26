@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		312EE62B2220F6F0007A6811 /* AdditionalFieldsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 312EE62A2220F6F0007A6811 /* AdditionalFieldsViewController.swift */; };
-		312EE62D2222082D007A6811 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 312EE62C2222082D007A6811 /* SignInViewController.swift */; };
 		31875CC3221E4DA1009C3E3C /* rollcall.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 31875CC1221E4DA1009C3E3C /* rollcall.xcdatamodeld */; };
 		31875CC5221F38EA009C3E3C /* APIHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31875CC4221F38EA009C3E3C /* APIHelper.swift */; };
 		31BE12282200CBC200666475 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31BE12272200CBC200666475 /* HomeViewController.swift */; };
@@ -25,8 +23,6 @@
 
 /* Begin PBXFileReference section */
 		1F948D982CB1A9D55706D56C /* Pods-rollcall.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-rollcall.debug.xcconfig"; path = "Pods/Target Support Files/Pods-rollcall/Pods-rollcall.debug.xcconfig"; sourceTree = "<group>"; };
-		312EE62A2220F6F0007A6811 /* AdditionalFieldsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdditionalFieldsViewController.swift; sourceTree = "<group>"; };
-		312EE62C2222082D007A6811 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		31875CC2221E4DA1009C3E3C /* rollcall.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = rollcall.xcdatamodel; sourceTree = "<group>"; };
 		31875CC4221F38EA009C3E3C /* APIHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIHelper.swift; sourceTree = "<group>"; };
 		31BE12272200CBC200666475 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -63,8 +59,6 @@
 				31BE12272200CBC200666475 /* HomeViewController.swift */,
 				31BE122A2202040E00666475 /* RegisterViewController.swift */,
 				31D1614821F8D20B00DE7A5E /* ViewController.swift */,
-				312EE62A2220F6F0007A6811 /* AdditionalFieldsViewController.swift */,
-				312EE62C2222082D007A6811 /* SignInViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -250,8 +244,6 @@
 				31D1614921F8D20B00DE7A5E /* ViewController.swift in Sources */,
 				31D1614721F8D20B00DE7A5E /* AppDelegate.swift in Sources */,
 				31875CC3221E4DA1009C3E3C /* rollcall.xcdatamodeld in Sources */,
-				312EE62D2222082D007A6811 /* SignInViewController.swift in Sources */,
-				312EE62B2220F6F0007A6811 /* AdditionalFieldsViewController.swift in Sources */,
 				31BE12282200CBC200666475 /* HomeViewController.swift in Sources */,
 				31BE122B2202040E00666475 /* RegisterViewController.swift in Sources */,
 			);

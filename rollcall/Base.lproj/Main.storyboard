@@ -70,52 +70,6 @@
             </objects>
             <point key="canvasLocation" x="2665" y="385"/>
         </scene>
-        <!--Sign In View Controller-->
-        <scene sceneID="D6u-aQ-SAi">
-            <objects>
-                <viewController id="t2m-RA-oTo" customClass="SignInViewController" customModule="rollcall" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="Rfo-OB-hwW">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <visualEffectView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lZw-PD-VJ9">
-                                <rect key="frame" x="67" y="269" width="240" height="128"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" insetsLayoutMarginsFromSafeArea="NO" id="uUH-43-Ldv">
-                                    <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
-                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                    <subviews>
-                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DW5-dP-FXE">
-                                            <rect key="frame" x="-68" y="-260" width="375" height="647"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <connections>
-                                                <action selector="exit:" destination="t2m-RA-oTo" eventType="touchUpInside" id="jhV-lg-7zT"/>
-                                            </connections>
-                                        </button>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Successfully Signed In" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="7" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z1I-xn-dOb">
-                                            <rect key="frame" x="-8" y="-85" width="255" height="297"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="22"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                    </subviews>
-                                </view>
-                                <blurEffect style="light"/>
-                            </visualEffectView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <viewLayoutGuide key="safeArea" id="Lb0-nP-ov0"/>
-                    </view>
-                    <connections>
-                        <outlet property="resultLabel" destination="z1I-xn-dOb" id="9SQ-Fd-5GT"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="LnP-Ln-znZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3446" y="-63"/>
-        </scene>
         <!--Sign In-->
         <scene sceneID="qDX-sF-073">
             <objects>
@@ -179,50 +133,11 @@
                         <outlet property="cameraView" destination="ISE-BM-hsC" id="gt4-yB-3kd"/>
                         <outlet property="directionLabel" destination="460-l2-onK" id="f2I-jP-wF5"/>
                         <outlet property="welcomeMessage" destination="BDU-1E-6Gy" id="tnD-bY-m6G"/>
-                        <segue destination="dCG-Xg-bOg" kind="presentation" identifier="additionalQuestions" modalPresentationStyle="overCurrentContext" id="psh-lp-pNX"/>
-                        <segue destination="t2m-RA-oTo" kind="presentation" identifier="signedIn" id="Uhz-iF-TUi"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jbF-xe-596" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2664.8000000000002" y="-295.50224887556226"/>
-        </scene>
-        <!--Additional Fields View Controller-->
-        <scene sceneID="xjo-1T-GDB">
-            <objects>
-                <viewController id="dCG-Xg-bOg" customClass="AdditionalFieldsViewController" customModule="rollcall" customModuleProvider="target" sceneMemberID="viewController">
-                    <visualEffectView key="view" opaque="NO" contentMode="scaleToFill" id="R1H-cW-5r1">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="RY6-rn-YIw">
-                            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                            <subviews>
-                                <tableView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="vGD-Qj-2WR">
-                                    <rect key="frame" x="50" y="269" width="275" height="128"/>
-                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    <connections>
-                                        <outlet property="dataSource" destination="dCG-Xg-bOg" id="LnP-F1-Phb"/>
-                                        <outlet property="delegate" destination="dCG-Xg-bOg" id="b9K-8W-Lp8"/>
-                                    </connections>
-                                </tableView>
-                            </subviews>
-                            <constraints>
-                                <constraint firstItem="vGD-Qj-2WR" firstAttribute="leading" secondItem="RY6-rn-YIw" secondAttribute="leading" constant="50" id="GgO-dq-TdO"/>
-                                <constraint firstAttribute="trailing" secondItem="vGD-Qj-2WR" secondAttribute="trailing" constant="50" id="X8i-dA-wKp"/>
-                                <constraint firstItem="vGD-Qj-2WR" firstAttribute="centerY" secondItem="RY6-rn-YIw" secondAttribute="centerY" id="cHt-Zq-xFd"/>
-                                <constraint firstItem="vGD-Qj-2WR" firstAttribute="centerX" secondItem="RY6-rn-YIw" secondAttribute="centerX" id="vMh-Xj-ilw"/>
-                            </constraints>
-                        </view>
-                        <blurEffect style="light"/>
-                    </visualEffectView>
-                    <connections>
-                        <outlet property="questionTable" destination="vGD-Qj-2WR" id="CkU-eQ-nGj"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="waR-2B-44s" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3445.5999999999999" y="-717.39130434782612"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="In9-v9-x8p">

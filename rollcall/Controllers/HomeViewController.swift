@@ -13,8 +13,9 @@ import Alamofire
 
 class HomeViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate, CLLocationManagerDelegate {
 
-    let CHECKIN_URL = "http://localhost:8080/api/event/checkIn"
-    //let CHECKIN_URL = "http://rollcall-api.herokuapp.com/api/event/checkIn"
+    //let CHECKIN_URL = "http://localhost:8080/api/event/checkIn"
+    //let CHECKIN_URL = "http://Samanthas-MacBook-Pro-2.local:8080/api/event/checkIn"
+    let CHECKIN_URL = "http://rollcall-api.herokuapp.com/api/event/checkIn"
      let sessionManager = SessionManager()
     
     @IBOutlet weak var welcomeMessage: UILabel!
@@ -26,7 +27,9 @@ class HomeViewController: UIViewController, AVCaptureMetadataOutputObjectsDelega
     let locationManager = CLLocationManager()
     var longitude : Double?
     var latitutde : Double?
-    var checkInMess : String?
+    var eventName : String?
+    var parameters : Parameters?
+    var additionalQ : [Dictionary<String,Any>] = []
     
     //for establishing the camera
     var captureSession = AVCaptureSession()
@@ -74,48 +77,105 @@ class HomeViewController: UIViewController, AVCaptureMetadataOutputObjectsDelega
     
     func orgEnroll(jsonArr: [Dictionary<String,Any>]){
         //enroll the user into an organization as a board member
+        
     }
     
     func eventEnroll(jsonArr: [Dictionary<String,Any>]){
         //check the user into the event
-        //determine whether there are additional fields requested
-//        addFields = jsonArr[0]["additional_fields"] as? [Dictionary<String,Any>]
-//        if(addFields!.count > 0){
-//            //segue to add fields modal pop up
-//            DispatchQueue.main.async {
-//                self.performSegue(withIdentifier: "additionalQuestions", sender: self)
-//            }
-//        }
         
-        //create the new user in our database
-        let parameters: Parameters = [
+        //create the new checkIn in our database
+        parameters = [
             "email": userData[0],
             "first_name": userData[1],
             "last_name": userData[2],
             "phone": userData[3],
             "event_id": jsonArr[0]["event_id"]!,
-            //"org_id": jsonArr[0]["org_id"]!,
-            //"point_categories": jsonArr[0]["point_categories"]!
-            //"additional_fields":
+            "org_id": jsonArr[0]["org_id"]!,
+            "point_categories": jsonArr[0]["point_categories"]!
         ]
+        eventName = jsonArr[0]["event_name"] as? String
         
+        //determine whether there are additional fields requested
+        addFields = jsonArr[0]["additional_fields"] as? [Dictionary<String,Any>]
+        if(addFields!.count > 0){
+            additionalQuestions(addFields: addFields!)
+        }
+        else{
+            checkIn()
+        }
+    }
+    
+    func additionalQuestions(addFields: [Dictionary<String,Any>]){
+        let alert = UIAlertController(title: "Additional Questions", message: nil, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { action in
+            self.viewDidAppear(false)
+        }))
+        
+        for questions in addFields{
+            let q = questions["question"] as? String
+            
+            alert.addTextField(configurationHandler: { (textField) in
+                textField.text = q
+                textField.textAlignment = .center
+                textField.isEnabled = false
+                textField.backgroundColor = UIColor.clear
+                textField.borderStyle = UITextField.BorderStyle.none
+                textField.adjustsFontSizeToFitWidth = true
+            })
+            
+            alert.addTextField(configurationHandler: { textField in
+                textField.placeholder = "Answer..."
+            })
+        }
+        
+        let submitAction = UIAlertAction(title: "OK", style: .default, handler: { action in
+            //create the dictionary for questions and answers
+            for i in 0...alert.textFields!.count{
+                if(i % 2 != 0){
+                    self.additionalQ.append(["question": alert.textFields![i - 1].text!, "response": alert.textFields![i].text!])
+                }
+            }
+            self.checkInWithAddFields()
+        })
+        alert.addAction(submitAction)
+        
+        self.present(alert, animated: true)
+    }
+    
+    func checkInWithAddFields(){
+        parameters?.updateValue(additionalQ, forKey: "additional_questions")
+        checkIn()
+    }
+    
+    func checkIn(){
+        var checkInMess : String?
         self.sessionManager.adapter = AccessTokenAdapter(accessToken: accessToken!)
         self.sessionManager.request(self.CHECKIN_URL, method: .post, parameters: parameters, encoding: JSONEncoding.default).responseJSON{
             response in
             if let status = response.response?.statusCode{
                 switch(status){
                 case 201:
-                    self.checkInMess = "You have signed in to \(jsonArr[0]["event_name"]!)"
+                    let json = response.result.value as? [String: Any]
+                    let eventName = json?["message"] as? String
+                    checkInMess = "You have signed in to \(eventName ?? "the event")"
                 default:
                     let json = response.result.value as? [String: Any]
-                    self.checkInMess = json?["message"] as? String
+                    checkInMess = json?["message"] as? String
                 }
-             
-                DispatchQueue.main.async {
-                    self.performSegue(withIdentifier: "signedIn", sender: self)
-                }
+                
+                self.signInSuccess(message: checkInMess!);
             }
         }
+    }
+    
+    func signInSuccess(message: String){
+        let alert = UIAlertController(title: message, message: nil, preferredStyle: .alert)
+        
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+            self.viewDidAppear(false)
+        }))
+        
+        self.present(alert, animated: true)
     }
     
     override func viewDidLoad() {
@@ -174,20 +234,6 @@ class HomeViewController: UIViewController, AVCaptureMetadataOutputObjectsDelega
     override func viewDidAppear(_ animated: Bool) {
         //starts running the camera
         captureSession.startRunning()
-        
-        directionLabel.text = "Scan the QR Code to Sign In!";
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "additionalQuestions"{
-            let destinationVC = segue.destination as! AdditionalFieldsViewController
-            destinationVC.addFields = self.addFields
-        }
-        
-        if segue.identifier == "signedIn"{
-            let destinationVC = segue.destination as! SignInViewController
-            destinationVC.res = self.checkInMess
-        }
     }
     
     /*

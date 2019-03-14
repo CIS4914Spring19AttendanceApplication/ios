@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		315D7026223AD67C0032352E /* HistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 315D7025223AD67C0032352E /* HistoryViewController.swift */; };
 		31875CC3221E4DA1009C3E3C /* rollcall.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 31875CC1221E4DA1009C3E3C /* rollcall.xcdatamodeld */; };
 		31875CC5221F38EA009C3E3C /* APIHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31875CC4221F38EA009C3E3C /* APIHelper.swift */; };
 		31BE12282200CBC200666475 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31BE12272200CBC200666475 /* HomeViewController.swift */; };
@@ -23,6 +24,7 @@
 
 /* Begin PBXFileReference section */
 		1F948D982CB1A9D55706D56C /* Pods-rollcall.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-rollcall.debug.xcconfig"; path = "Pods/Target Support Files/Pods-rollcall/Pods-rollcall.debug.xcconfig"; sourceTree = "<group>"; };
+		315D7025223AD67C0032352E /* HistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryViewController.swift; sourceTree = "<group>"; };
 		31875CC2221E4DA1009C3E3C /* rollcall.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = rollcall.xcdatamodel; sourceTree = "<group>"; };
 		31875CC4221F38EA009C3E3C /* APIHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIHelper.swift; sourceTree = "<group>"; };
 		31BE12272200CBC200666475 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -59,6 +61,7 @@
 				31BE12272200CBC200666475 /* HomeViewController.swift */,
 				31BE122A2202040E00666475 /* RegisterViewController.swift */,
 				31D1614821F8D20B00DE7A5E /* ViewController.swift */,
+				315D7025223AD67C0032352E /* HistoryViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -245,6 +248,7 @@
 				31D1614721F8D20B00DE7A5E /* AppDelegate.swift in Sources */,
 				31875CC3221E4DA1009C3E3C /* rollcall.xcdatamodeld in Sources */,
 				31BE12282200CBC200666475 /* HomeViewController.swift in Sources */,
+				315D7026223AD67C0032352E /* HistoryViewController.swift in Sources */,
 				31BE122B2202040E00666475 /* RegisterViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

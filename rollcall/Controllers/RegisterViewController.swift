@@ -11,8 +11,9 @@ import Alamofire
 
 class RegisterViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
   
-    //let REGISTER_URL = "http://rollcall-api.herokuapp.com/api/user/registeruser"
-    let REGISTER_URL = "http://localhost:8080/api/user/registeruser"
+    let REGISTER_URL = "http://rollcall-api.herokuapp.com/api/user/registeruser"
+    //let REGISTER_URL = "http://localhost:8080/api/user/registeruser"
+    //let REGISTER_URL = "http://Samanthas-MacBook-Pro-2.local:8080/api/event/checkIn"
     let sessionManager = SessionManager()
     
     @IBOutlet weak var warningLabel: UILabel!
@@ -53,6 +54,8 @@ class RegisterViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
         
         yearPicker.delegate = self;
         yearPicker.dataSource = self;
+        
+        self.view.addGestureRecognizer(UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing(_:))))
     }
     
     func validate(value: String) -> Bool {

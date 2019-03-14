@@ -14,9 +14,10 @@ import Alamofire
 class HomeViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate, CLLocationManagerDelegate {
 
     //let CHECKIN_URL = "http://localhost:8080/api/event/checkIn"
-    //let CHECKIN_URL = "http://Samanthas-MacBook-Pro-2.local:8080/api/event/checkIn"
-    let CHECKIN_URL = "http://rollcall-api.herokuapp.com/api/event/checkIn"
-     let sessionManager = SessionManager()
+    let CHECKIN_URL = "http://Samanthas-MacBook-Pro-2.local:8080/api/event/checkIn"
+    //let CHECKIN_URL = "http://rollcall-api.herokuapp.com/api/event/checkIn"
+    let ADDBOARD_URL = "http://Samanthas-MacBook-Pro-2.local:8080/api/org/addBoard"
+    let sessionManager = SessionManager()
     
     @IBOutlet weak var welcomeMessage: UILabel!
     @IBOutlet weak var directionLabel: UILabel!
@@ -77,7 +78,27 @@ class HomeViewController: UIViewController, AVCaptureMetadataOutputObjectsDelega
     
     func orgEnroll(jsonArr: [Dictionary<String,Any>]){
         //enroll the user into an organization as a board member
+        var enrollMess : String?
+        let params = [
+            "org_id": jsonArr[0]["org_id"],
+            "email": userData[0]
+        ]
         
+        self.sessionManager.adapter = AccessTokenAdapter(accessToken: accessToken!)
+        self.sessionManager.request(self.ADDBOARD_URL, method: .post, parameters: params as Parameters, encoding: JSONEncoding.default).responseJSON{
+            response in
+            if let status = response.response?.statusCode{
+                switch(status){
+                case 201:
+                    enrollMess = "You have been enrolled as a Board Member"
+                default:
+                    let json = response.result.value as? [String: Any]
+                    enrollMess = json?["message"] as? String
+                }
+                
+                self.signInSuccess(message: enrollMess!);
+            }
+        }
     }
     
     func eventEnroll(jsonArr: [Dictionary<String,Any>]){

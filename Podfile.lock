@@ -2,23 +2,27 @@ PODS:
   - Alamofire (4.8.1)
   - Auth0 (1.14.1):
     - SimpleKeychain
+  - SCLAlertView (0.8)
   - SimpleKeychain (0.8.1)
 
 DEPENDENCIES:
   - Alamofire
   - Auth0 (~> 1.13)
+  - SCLAlertView
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - Alamofire
     - Auth0
+    - SCLAlertView
     - SimpleKeychain
 
 SPEC CHECKSUMS:
   Alamofire: 16ce2c353fb72865124ddae8a57c5942388f4f11
   Auth0: 064dc115cd99eec7334d1cab565f4d974eecac4d
+  SCLAlertView: 6a77bb2edfc65e04dbe57725546cb4107a506b85
   SimpleKeychain: e2485c28d82fcece35e9e41faeac42ebfe614815
 
-PODFILE CHECKSUM: 05b278a17f831ff18d1f576dc9ed3b3ae2a0fa2c
+PODFILE CHECKSUM: 9ae517c961438fe671b606e3a1c53782bcb68e2a
 
 COCOAPODS: 1.5.3

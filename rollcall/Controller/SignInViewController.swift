@@ -10,6 +10,7 @@ import UIKit
 import AVFoundation
 import CoreLocation
 import Alamofire
+import SCLAlertView
 
 class HomeViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate, CLLocationManagerDelegate {
 
@@ -22,8 +23,7 @@ class HomeViewController: UIViewController, AVCaptureMetadataOutputObjectsDelega
     @IBOutlet weak var welcomeMessage: UILabel!
     @IBOutlet weak var directionLabel: UILabel!
     @IBOutlet weak var cameraView: UIImageView!
-    //var userData : [String] = []
-    //var accessToken : String?
+
     var addFields : [Dictionary<String,Any>]?
     let locationManager = CLLocationManager()
     var longitude : Double?
@@ -88,19 +88,29 @@ class HomeViewController: UIViewController, AVCaptureMetadataOutputObjectsDelega
             "email": Data.sharedInstance.userData[0]
         ]
         
+        let appearance = SCLAlertView.SCLAppearance(
+            showCloseButton: false
+        )
+        let alert = SCLAlertView(appearance: appearance)
+        
+        alert.addButton("Done", action: {
+            self.captureSession.startRunning()
+            alert.hideView()
+        })
+        
         self.sessionManager.adapter = AccessTokenAdapter(accessToken: Data.sharedInstance.accessToken!)
         self.sessionManager.request(self.ADDBOARD_URL, method: .post, parameters: params as Parameters, encoding: JSONEncoding.default).responseJSON{
             response in
             if let status = response.response?.statusCode{
                 switch(status){
                 case 201:
-                    enrollMess = "You have been enrolled as a Board Member"
+                    enrollMess = "You have been enrolled as a Board Member in \(jsonArr[0]["org_name"] ?? "this organization")."
+                    alert.showSuccess("Success", subTitle: enrollMess ?? "")
                 default:
                     let json = response.result.value as? [String: Any]
                     enrollMess = json?["message"] as? String
+                    alert.showError("Error", subTitle: enrollMess ?? "")
                 }
-                
-                self.signInSuccess(message: enrollMess!);
             }
         }
     }
@@ -131,40 +141,56 @@ class HomeViewController: UIViewController, AVCaptureMetadataOutputObjectsDelega
     }
     
     func additionalQuestions(addFields: [Dictionary<String,Any>]){
-        let alert = UIAlertController(title: "Additional Questions", message: nil, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { action in
-            self.viewDidAppear(false)
-        }))
+        var additionalQA = [Any]()
         
+        let appearance = SCLAlertView.SCLAppearance(
+            showCloseButton: false,
+            shouldAutoDismiss: false
+        )
+        let alert = SCLAlertView(appearance: appearance)
+    
         for questions in addFields{
             let q = questions["question"] as? String
+            additionalQA.append(q as Any)
             
-            alert.addTextField(configurationHandler: { (textField) in
-                textField.text = q
-                textField.textAlignment = .center
-                textField.isEnabled = false
-                textField.backgroundColor = UIColor.clear
-                textField.borderStyle = UITextField.BorderStyle.none
-                textField.adjustsFontSizeToFitWidth = true
-            })
-            
-            alert.addTextField(configurationHandler: { textField in
-                textField.placeholder = "Answer..."
-            })
+            let ques = alert.addTextField(q)
+            ques.adjustsFontSizeToFitWidth = true;
+            additionalQA.append(ques as Any)
         }
         
-        let submitAction = UIAlertAction(title: "OK", style: .default, handler: { action in
-            //create the dictionary for questions and answers
-            for i in 0...alert.textFields!.count{
+        alert.addButton("Submit", action: {
+            for i in 0...additionalQA.count{
+                //for each text field
                 if(i % 2 != 0){
-                    self.additionalQ.append(["question": alert.textFields![i - 1].text!, "response": alert.textFields![i].text!])
+                    //if any of the text fields are empty, then do not allow to submit
+                    let textField = additionalQA[i] as? UITextField
+                    if(textField!.hasText == false){
+                        return
+                    }
+                }
+            }
+            
+            //if all of the fields have text
+            //add the questions and answers to the dictionary
+            for i in 0...additionalQA.count{
+                //for each text field
+                if(i % 2 != 0){
+                    let text = additionalQA[i - 1] as? String
+                    let textField = additionalQA[i] as? UITextField
+                    self.additionalQ.append(["question": text!, "response": textField?.text! as Any])
                 }
             }
             self.checkInWithAddFields()
+            
+            alert.hideView()
         })
-        alert.addAction(submitAction)
         
-        self.present(alert, animated: true)
+        alert.addButton("Close", action: {
+            self.captureSession.startRunning()
+            alert.hideView()
+        })
+        
+         alert.showEdit("Additional Questions", subTitle: "Please provide the following information")
     }
     
     func checkInWithAddFields(){
@@ -173,6 +199,16 @@ class HomeViewController: UIViewController, AVCaptureMetadataOutputObjectsDelega
     }
     
     func checkIn(){
+        let appearance = SCLAlertView.SCLAppearance(
+            showCloseButton: false
+        )
+        let alert = SCLAlertView(appearance: appearance)
+        
+        alert.addButton("Done", action: {
+            self.captureSession.startRunning()
+            alert.hideView()
+        })
+        
         var checkInMess : String?
         self.sessionManager.adapter = AccessTokenAdapter(accessToken: Data.sharedInstance.accessToken!)
         self.sessionManager.request(self.CHECKIN_URL, method: .post, parameters: parameters, encoding: JSONEncoding.default).responseJSON{
@@ -180,27 +216,16 @@ class HomeViewController: UIViewController, AVCaptureMetadataOutputObjectsDelega
             if let status = response.response?.statusCode{
                 switch(status){
                 case 201:
-                    let json = response.result.value as? [String: Any]
-                    let eventName = json?["message"] as? String
-                    checkInMess = "You have signed in to \(eventName ?? "the event")"
+                    checkInMess = "You have signed in to \"\(self.eventName ?? "the event")\". Thanks for coming!"
+                    alert.showSuccess("Success", subTitle: checkInMess ?? "")
                 default:
                     let json = response.result.value as? [String: Any]
                     checkInMess = json?["message"] as? String
+                    alert.showError("uh oh", subTitle: checkInMess ?? "")
                 }
                 
-                self.signInSuccess(message: checkInMess!);
             }
         }
-    }
-    
-    func signInSuccess(message: String){
-        let alert = UIAlertController(title: message, message: nil, preferredStyle: .alert)
-        
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
-            self.viewDidAppear(false)
-        }))
-        
-        self.present(alert, animated: true)
     }
     
     override func viewDidLoad() {

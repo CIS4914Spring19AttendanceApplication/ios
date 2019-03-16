@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		315D7026223AD67C0032352E /* HistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 315D7025223AD67C0032352E /* HistoryViewController.swift */; };
+		315D7028223AF4930032352E /* SharedData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 315D7027223AF4930032352E /* SharedData.swift */; };
 		31875CC3221E4DA1009C3E3C /* rollcall.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 31875CC1221E4DA1009C3E3C /* rollcall.xcdatamodeld */; };
 		31875CC5221F38EA009C3E3C /* APIHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31875CC4221F38EA009C3E3C /* APIHelper.swift */; };
 		31BE12282200CBC200666475 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31BE12272200CBC200666475 /* HomeViewController.swift */; };
@@ -25,6 +26,7 @@
 /* Begin PBXFileReference section */
 		1F948D982CB1A9D55706D56C /* Pods-rollcall.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-rollcall.debug.xcconfig"; path = "Pods/Target Support Files/Pods-rollcall/Pods-rollcall.debug.xcconfig"; sourceTree = "<group>"; };
 		315D7025223AD67C0032352E /* HistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryViewController.swift; sourceTree = "<group>"; };
+		315D7027223AF4930032352E /* SharedData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedData.swift; sourceTree = "<group>"; };
 		31875CC2221E4DA1009C3E3C /* rollcall.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = rollcall.xcdatamodel; sourceTree = "<group>"; };
 		31875CC4221F38EA009C3E3C /* APIHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIHelper.swift; sourceTree = "<group>"; };
 		31BE12272200CBC200666475 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -62,6 +64,7 @@
 				31BE122A2202040E00666475 /* RegisterViewController.swift */,
 				31D1614821F8D20B00DE7A5E /* ViewController.swift */,
 				315D7025223AD67C0032352E /* HistoryViewController.swift */,
+				315D7027223AF4930032352E /* SharedData.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -247,6 +250,7 @@
 				31D1614921F8D20B00DE7A5E /* ViewController.swift in Sources */,
 				31D1614721F8D20B00DE7A5E /* AppDelegate.swift in Sources */,
 				31875CC3221E4DA1009C3E3C /* rollcall.xcdatamodeld in Sources */,
+				315D7028223AF4930032352E /* SharedData.swift in Sources */,
 				31BE12282200CBC200666475 /* HomeViewController.swift in Sources */,
 				315D7026223AD67C0032352E /* HistoryViewController.swift in Sources */,
 				31BE122B2202040E00666475 /* RegisterViewController.swift in Sources */,
@@ -396,6 +400,7 @@
 			baseConfigurationReference = 1F948D982CB1A9D55706D56C /* Pods-rollcall.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = FMKC8L888F;
 				INFOPLIST_FILE = rollcall/Info.plist;
@@ -405,8 +410,9 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = seniorproject.rollcall;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -415,6 +421,7 @@
 			baseConfigurationReference = 4917793ADFA2BF55164FC1A2 /* Pods-rollcall.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = FMKC8L888F;
 				INFOPLIST_FILE = rollcall/Info.plist;
@@ -424,8 +431,9 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = seniorproject.rollcall;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

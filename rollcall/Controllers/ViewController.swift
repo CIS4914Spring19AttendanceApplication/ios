@@ -16,8 +16,8 @@ class ViewController: UIViewController {
     //let ONBOARD_URL = "http://localhost:8080/api/user/onboardcheck/"
     let sessionManager = SessionManager()
     
-    var accessToken : String?
-    var userData : [String] = []
+    //var accessToken : String?
+    //var userData : [String] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,7 +45,8 @@ class ViewController: UIViewController {
                     }
                     print("1: \(accessToken)")
                     self.sessionManager.adapter = AccessTokenAdapter(accessToken: accessToken)
-                    self.accessToken = accessToken
+                    //self.accessToken = accessToken
+                    Data.sharedInstance.accessToken = accessToken
                     
                     Auth0
                         .authentication()
@@ -55,7 +56,8 @@ class ViewController: UIViewController {
                             case .success(let profile):
                                 
                                 if let name = profile.name {
-                                    self.userData.append(name)
+                                    //self.userData.append(name)
+                                    Data.sharedInstance.userData.append(name)
                                     
                                     //check if the user is already in our database
                                     let completeURL = self.ONBOARD_URL + name
@@ -66,9 +68,12 @@ class ViewController: UIViewController {
                                             switch(status){
                                             case 200:
                                                 let json = response.result.value as? [String: Any]
-                                                self.userData.append(json?["first_name"] as! String)
-                                                self.userData.append(json?["last_name"] as! String)
-                                                self.userData.append(json?["phone"] as? String ?? "" )
+                                                Data.sharedInstance.userData.append(json?["first_name"] as! String)
+                                                Data.sharedInstance.userData.append(json?["last_name"] as! String)
+                                                Data.sharedInstance.userData.append(json?["phone"] as! String)
+                                                //self.userData.append(json?["first_name"] as! String)
+                                                //self.userData.append(json?["last_name"] as! String)
+                                                //self.userData.append(json?["phone"] as! String)
                                                 
                                                 //go to the home screen
                                                 DispatchQueue.main.async {
@@ -96,19 +101,19 @@ class ViewController: UIViewController {
         }
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "goToHome"{
-            let barController = segue.destination as! UITabBarController
-            let destinationVC = barController.viewControllers![0] as! HomeViewController
-            destinationVC.userData = self.userData
-            destinationVC.accessToken = self.accessToken
-        }
-        
-        if segue.identifier == "goToRegistration"{
-            let destinationVC = segue.destination as! RegisterViewController
-            destinationVC.emailPassedOver = self.userData[0]
-            destinationVC.accessToken = self.accessToken
-        }
-    }
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        if segue.identifier == "goToHome"{
+//            let barController = segue.destination as! UITabBarController
+//            let destinationVC = barController.viewControllers![0] as! HomeViewController
+//            //destinationVC.userData = self.userData
+//            //destinationVC.accessToken = self.accessToken
+//        }
+//        
+//        if segue.identifier == "goToRegistration"{
+//            let destinationVC = segue.destination as! RegisterViewController
+//            //destinationVC.emailPassedOver = self.userData[0]
+//            //destinationVC.accessToken = self.accessToken
+//        }
+//    }
 }
 

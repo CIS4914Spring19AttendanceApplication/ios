@@ -22,8 +22,8 @@ class HomeViewController: UIViewController, AVCaptureMetadataOutputObjectsDelega
     @IBOutlet weak var welcomeMessage: UILabel!
     @IBOutlet weak var directionLabel: UILabel!
     @IBOutlet weak var cameraView: UIImageView!
-    var userData : [String] = []
-    var accessToken : String?
+    //var userData : [String] = []
+    //var accessToken : String?
     var addFields : [Dictionary<String,Any>]?
     let locationManager = CLLocationManager()
     var longitude : Double?
@@ -40,7 +40,11 @@ class HomeViewController: UIViewController, AVCaptureMetadataOutputObjectsDelega
     func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects: [AVMetadataObject], from connection: AVCaptureConnection){
         
         //get the metadata object
-        let metadataObj = metadataObjects[0] as! AVMetadataMachineReadableCodeObject
+        guard let metadataObj = metadataObjects[0] as? AVMetadataMachineReadableCodeObject else{
+            captureSession.startRunning()
+            print("app crashed")
+            return
+        }
         
         if metadataObj.type == AVMetadataObject.ObjectType.qr{
             
@@ -61,7 +65,7 @@ class HomeViewController: UIViewController, AVCaptureMetadataOutputObjectsDelega
             if let jsonArray = try JSONSerialization.jsonObject(with: data!, options : .allowFragments) as? [Dictionary<String,Any>]
             {
                 //check whether it is an org or event qr
-                if(jsonArray[0]["type"] as! String == "organization"){
+                if(jsonArray[0]["type"] as! String == "org"){
                     orgEnroll(jsonArr: jsonArray)
                 }
                 else{
@@ -81,10 +85,10 @@ class HomeViewController: UIViewController, AVCaptureMetadataOutputObjectsDelega
         var enrollMess : String?
         let params = [
             "org_id": jsonArr[0]["org_id"],
-            "email": userData[0]
+            "email": Data.sharedInstance.userData[0]
         ]
         
-        self.sessionManager.adapter = AccessTokenAdapter(accessToken: accessToken!)
+        self.sessionManager.adapter = AccessTokenAdapter(accessToken: Data.sharedInstance.accessToken!)
         self.sessionManager.request(self.ADDBOARD_URL, method: .post, parameters: params as Parameters, encoding: JSONEncoding.default).responseJSON{
             response in
             if let status = response.response?.statusCode{
@@ -106,10 +110,10 @@ class HomeViewController: UIViewController, AVCaptureMetadataOutputObjectsDelega
         
         //create the new checkIn in our database
         parameters = [
-            "email": userData[0],
-            "first_name": userData[1],
-            "last_name": userData[2],
-            "phone": userData[3],
+            "email": Data.sharedInstance.userData[0],
+            "first_name": Data.sharedInstance.userData[1],
+            "last_name": Data.sharedInstance.userData[2],
+            "phone": Data.sharedInstance.userData[3],
             "event_id": jsonArr[0]["event_id"]!,
             "org_id": jsonArr[0]["org_id"]!,
             "point_categories": jsonArr[0]["point_categories"]!
@@ -170,7 +174,7 @@ class HomeViewController: UIViewController, AVCaptureMetadataOutputObjectsDelega
     
     func checkIn(){
         var checkInMess : String?
-        self.sessionManager.adapter = AccessTokenAdapter(accessToken: accessToken!)
+        self.sessionManager.adapter = AccessTokenAdapter(accessToken: Data.sharedInstance.accessToken!)
         self.sessionManager.request(self.CHECKIN_URL, method: .post, parameters: parameters, encoding: JSONEncoding.default).responseJSON{
             response in
             if let status = response.response?.statusCode{
@@ -202,7 +206,7 @@ class HomeViewController: UIViewController, AVCaptureMetadataOutputObjectsDelega
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        welcomeMessage.text = "Welcome, \(userData[1])!"
+        welcomeMessage.text = "Welcome, \(Data.sharedInstance.userData[1])!"
     
         //finds the device's camera
         let deviceDiscoverySession = AVCaptureDevice.DiscoverySession(deviceTypes: [.builtInWideAngleCamera], mediaType: AVMediaType.video, position: .back)
@@ -227,7 +231,8 @@ class HomeViewController: UIViewController, AVCaptureMetadataOutputObjectsDelega
             }
             
             captureMetadataOutput.setMetadataObjectsDelegate(self, queue: DispatchQueue.main)
-            captureMetadataOutput.metadataObjectTypes = captureMetadataOutput.availableMetadataObjectTypes
+            //captureMetadataOutput.metadataObjectTypes = captureMetadataOutput.availableMetadataObjectTypes
+            captureMetadataOutput.metadataObjectTypes = [AVMetadataObject.ObjectType.qr]
             
             //starts running the camera
             captureSession.startRunning()

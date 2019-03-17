@@ -12,7 +12,7 @@ import Alamofire
 struct orgData{
     var opened = Bool()
     var name = String()
-    var totalPoints = String()
+    var totalPoints = Int()
     var events = [eventData]()
 }
 
@@ -45,6 +45,7 @@ class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewD
         historyData.removeAll()
         
         let historyURL = GET_HISTORY_URL + Data.sharedInstance.userData[0]
+        self.sessionManager.adapter = AccessTokenAdapter(accessToken: Data.sharedInstance.accessToken!)
         self.sessionManager.request(historyURL, method: .get, encoding: JSONEncoding.default).responseData{
             response in
             if let status = response.response?.statusCode{
@@ -74,23 +75,33 @@ class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewD
     func formatHistoryData(results : [Dictionary<String, Any>]){
         //store the first org name
         var currentOrg = results[0]["org_name"] as! String
-        var org = orgData(opened: false, name: currentOrg, totalPoints: "0", events: [])
+        var org = orgData(opened: false, name: currentOrg, totalPoints: 0, events: [])
         
+        var points: Int = 0
         //loop through all of the results
         for event in results{
             let org_name = event["org_name"] as! String
             if(org_name != currentOrg){
-                //once done with an org, add it to the array
+                //once done with an org, add it to the array and reset points
+                org.totalPoints = points
+                points = 0
                 historyData.append(org)
                 
                 currentOrg = event["org_name"] as! String
-                org = orgData(opened: false, name: currentOrg, totalPoints: "0", events: [])
+                org = orgData(opened: false, name: currentOrg, totalPoints: 0, events: [])
             }
             let currentEvent = eventData(opened: false, name: event["name"]! as! String, eventData: event)
             org.events.append(currentEvent)
+            
+            //calculate the number of points in the event
+            let p = currentEvent.eventData["point_categories"] as! [Dictionary<String,Any>]
+            for cat in p{
+                points = points + (cat["points"] as! Int)
+            }
         }
         
         //add the final org to the array after exiting the loop
+        org.totalPoints = points
         historyData.append(org)
     }
 
@@ -119,8 +130,7 @@ class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewD
         if(indexPath.row == 0){
             guard let cell = orgTable.dequeueReusableCell(withIdentifier: "basicCell") else {return UITableViewCell()}
             cell.textLabel?.text = historyData[indexPath.section].name
-            cell.detailTextLabel?.text = historyData[indexPath.section].totalPoints
-            //fix when points are implemented
+            cell.detailTextLabel?.text = String(historyData[indexPath.section].totalPoints)
             cell.detailTextLabel?.textColor = UIColor.green
             return cell
         }
@@ -130,7 +140,19 @@ class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewD
             
             let date = historyData[indexPath.section].events[indexPath.row - 1].eventData["date"] as! String
             let location = historyData[indexPath.section].events[indexPath.row - 1].eventData["location"] as! String
-            cell.detailTextLabel?.text = date + ", " + location + ", Point Category 0 points"
+            //get the points categories
+            let points = historyData[indexPath.section].events[indexPath.row - 1].eventData["point_categories"] as! [Dictionary<String,Any>]
+            var point_des = String()
+            for (i,cat) in points.enumerated(){
+                let p = String(cat["points"] as! Int)
+                point_des.append(p + " ")
+                point_des.append(cat["name"] as! String)
+                if(i != points.count - 1){
+                    point_des.append(", ")
+                }
+            }
+            point_des.append(" point(s)")
+            cell.detailTextLabel?.text = date + ", " + location + ", " + point_des
             return cell
         }
     }

@@ -12,8 +12,8 @@ import Alamofire
 struct orgData{
     var opened = Bool()
     var name = String()
-    var totalPoints = Int()
-    var events = [eventData]()
+    var events = [Dictionary<String, Any>]()
+    var points = [Dictionary<String, Any>]()
 }
 
 struct eventData{
@@ -27,6 +27,7 @@ class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     @IBOutlet weak var myOrgTitle: UILabel!
     @IBOutlet weak var orgTable: UITableView!
+    
     var historyData = [orgData]()
     
     let GET_HISTORY_URL = "http://Samanthas-MacBook-Pro-2.local:8080/api/user/history/"
@@ -73,36 +74,11 @@ class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     func formatHistoryData(results : [Dictionary<String, Any>]){
-        //store the first org name
-        var currentOrg = results[0]["org_name"] as! String
-        var org = orgData(opened: false, name: currentOrg, totalPoints: 0, events: [])
-        
-        var points: Int = 0
-        //loop through all of the results
-        for event in results{
-            let org_name = event["org_name"] as! String
-            if(org_name != currentOrg){
-                //once done with an org, add it to the array and reset points
-                org.totalPoints = points
-                points = 0
-                historyData.append(org)
-                
-                currentOrg = event["org_name"] as! String
-                org = orgData(opened: false, name: currentOrg, totalPoints: 0, events: [])
-            }
-            let currentEvent = eventData(opened: false, name: event["name"]! as! String, eventData: event)
-            org.events.append(currentEvent)
-            
-            //calculate the number of points in the event
-            let p = currentEvent.eventData["point_categories"] as! [Dictionary<String,Any>]
-            for cat in p{
-                points = points + (cat["points"] as! Int)
-            }
+        //loop through all of the returned results
+        for org in results{
+            let currentOrg = orgData(opened: false, name: org["org"] as! String, events: org["events"] as! [[String : Any]], points: org["point_status"] as! [[String : Any]])
+            historyData.append(currentOrg)
         }
-        
-        //add the final org to the array after exiting the loop
-        org.totalPoints = points
-        historyData.append(org)
     }
 
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -110,9 +86,8 @@ class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        //if that section is opened
         if(historyData[section].opened == true){
-            return historyData[section].events.count + 1
+            return historyData[section].events.count + historyData[section].points.count + 2
         }
         else{
             return 1
@@ -126,22 +101,51 @@ class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewD
             cell.textLabel?.text = "You are not enrolled in any organizations yet!"
             return cell
         }
+        let numEvents = historyData[indexPath.section].events.count + 2
         
         if(indexPath.row == 0){
-            guard let cell = orgTable.dequeueReusableCell(withIdentifier: "basicCell") else {return UITableViewCell()}
-            cell.textLabel?.text = historyData[indexPath.section].name
-            cell.detailTextLabel?.text = String(historyData[indexPath.section].totalPoints)
-            cell.detailTextLabel?.textColor = UIColor.green
+            let cell = orgTable.dequeueReusableCell(withIdentifier: "basicCell") as! OrganizationCell
+            
+            let totalPointCats = historyData[indexPath.section].points.count
+            let curr = historyData[indexPath.section].points[totalPointCats - 1]["current_points"] as! Int
+            let total = historyData[indexPath.section].points[totalPointCats - 1]["total_points"] as! Int
+            let details = String(curr) + "/" + String(total)
+            cell.setInfo(n: historyData[indexPath.section].name, d: details, min: (curr >= total))
+
+            return cell
+        }
+        else if(indexPath.row == 1){
+            let cell = orgTable.dequeueReusableCell(withIdentifier: "subHeader") as! HeaderCell
+            cell.setInfo(title: "Events Attended")
+            return cell
+        }
+        else if (indexPath.row == numEvents){
+            let cell = orgTable.dequeueReusableCell(withIdentifier: "subHeader") as! HeaderCell
+            cell.setInfo(title: "Points Earned")
+            return cell
+        }
+        else if (indexPath.row > numEvents) {
+            //add the cells for the current point standings
+             let cell = orgTable.dequeueReusableCell(withIdentifier: "pointCell") as! PointsCell
+
+            let currentPoints = historyData[indexPath.section].points[indexPath.row - numEvents - 1]["current_points"] as! Int
+            let neededPoints = historyData[indexPath.section].points[indexPath.row - numEvents - 1]["total_points"] as! Int
+
+            let name = historyData[indexPath.section].points[indexPath.row - numEvents - 1]["category"] as? String
+            let details = String(currentPoints) + "/" + String(neededPoints)
+            cell.setInfo(n: name!, d: details, min: (currentPoints >= neededPoints))
             return cell
         }
         else{
-            guard let cell = orgTable.dequeueReusableCell(withIdentifier: "eventCell") else {return UITableViewCell()}
-            cell.textLabel?.text = historyData[indexPath.section].events[indexPath.row - 1].name
-            
-            let date = historyData[indexPath.section].events[indexPath.row - 1].eventData["date"] as! String
-            let location = historyData[indexPath.section].events[indexPath.row - 1].eventData["location"] as! String
+            let cell = orgTable.dequeueReusableCell(withIdentifier: "detailCell") as! EventCell
+            let row = indexPath.row - 2
+            let name = historyData[indexPath.section].events[row]["name"] as? String
+
+            let date = historyData[indexPath.section].events[row]["date"] as? String
+            let location = historyData[indexPath.section].events[row]["location"] as? String
             //get the points categories
-            let points = historyData[indexPath.section].events[indexPath.row - 1].eventData["point_categories"] as! [Dictionary<String,Any>]
+
+            let points = historyData[indexPath.section].events[row]["point_categories"] as! [Dictionary<String,Any>]
             var point_des = String()
             for (i,cat) in points.enumerated(){
                 let p = String(cat["points"] as! Int)
@@ -152,7 +156,9 @@ class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewD
                 }
             }
             point_des.append(" point(s)")
-            cell.detailTextLabel?.text = date + ", " + location + ", " + point_des
+            let details = date! + ", " + location! + ", " + point_des
+            
+            cell.setInfo(n: name!, d: details)
             return cell
         }
     }
@@ -161,13 +167,13 @@ class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewD
         if(indexPath.row == 0){
             if (historyData[indexPath.section].opened == true){
                 historyData[indexPath.section].opened = false
-                let eventSections = IndexSet.init(integer: indexPath.section)
-                orgTable.reloadSections(eventSections, with: .none)
+                let subHeadings = IndexSet.init(integer: indexPath.section)
+                orgTable.reloadSections(subHeadings, with: .none)
             }
             else{
                 historyData[indexPath.section].opened = true
-                let eventSections = IndexSet.init(integer: indexPath.section)
-                orgTable.reloadSections(eventSections, with: .none)
+                let subHeadings = IndexSet.init(integer: indexPath.section)
+                orgTable.reloadSections(subHeadings, with: .none)
             }
         }
     }

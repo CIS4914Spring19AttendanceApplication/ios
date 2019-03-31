@@ -45,13 +45,13 @@ class HomeViewController: UIViewController, AVCaptureMetadataOutputObjectsDelega
             print("app crashed")
             return
         }
-        
+
         if metadataObj.type == AVMetadataObject.ObjectType.qr{
-            
+
             if metadataObj.stringValue != nil{
                 captureSession.stopRunning()
                 locationManager.startUpdatingLocation()
-                
+
                 let qrJSON = metadataObj.stringValue!
                 processQR(qrJSON: qrJSON)
             }
@@ -158,7 +158,7 @@ class HomeViewController: UIViewController, AVCaptureMetadataOutputObjectsDelega
             additionalQA.append(ques as Any)
         }
         
-        alert.addButton("Submit", action: {
+        alert.addButton("Sign In", action: {
             for i in 0...additionalQA.count{
                 //for each text field
                 if(i % 2 != 0){

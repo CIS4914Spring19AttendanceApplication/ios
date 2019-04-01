@@ -26,8 +26,8 @@ class HomeViewController: UIViewController, AVCaptureMetadataOutputObjectsDelega
 
     var addFields : [Dictionary<String,Any>]?
     let locationManager = CLLocationManager()
-    var longitude : Double?
-    var latitutde : Double?
+    var longitude : Double = 0.00
+    var latitude : Double = 0.00
     var eventName : String?
     var parameters : Parameters?
     var additionalQ : [Dictionary<String,Any>] = []
@@ -156,7 +156,9 @@ class HomeViewController: UIViewController, AVCaptureMetadataOutputObjectsDelega
             "phone": Data.sharedInstance.userData[3],
             "event_id": event_id,
             "org_id": org_id,
-            "point_categories": jsonArr[0]["point_categories"] as Any
+            "point_categories": jsonArr[0]["point_categories"] as Any,
+            "latitude": latitude as Any,
+            "longitude": longitude as Any
         ]
         eventName = jsonArr[0]["event_name"] as? String
         
@@ -207,7 +209,7 @@ class HomeViewController: UIViewController, AVCaptureMetadataOutputObjectsDelega
                 if(i % 2 != 0){
                     let text = additionalQA[i - 1] as? String
                     let textField = additionalQA[i] as? UITextField
-                    self.additionalQ.append(["question": text!, "response": textField?.text! as Any])
+                    self.additionalQ.append(["question": text!, "response": textField!.text])
                 }
             }
             self.checkInWithAddFields()
@@ -224,7 +226,7 @@ class HomeViewController: UIViewController, AVCaptureMetadataOutputObjectsDelega
     }
     
     func checkInWithAddFields(){
-        parameters?.updateValue(additionalQ, forKey: "additional_questions")
+        parameters?.updateValue(additionalQ as Any, forKey: "additional_fields")
         checkIn()
     }
     
@@ -307,7 +309,7 @@ class HomeViewController: UIViewController, AVCaptureMetadataOutputObjectsDelega
         let location = locations[locations.count - 1]
         if location.horizontalAccuracy > 0{
             locationManager.stopUpdatingLocation()
-            latitutde = location.coordinate.latitude
+            latitude = location.coordinate.latitude
             longitude = location.coordinate.longitude
         }
     }

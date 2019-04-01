@@ -59,6 +59,16 @@ class HomeViewController: UIViewController, AVCaptureMetadataOutputObjectsDelega
     }
     
     func processQR(qrJSON: String){
+        let appearance = SCLAlertView.SCLAppearance(
+            showCloseButton: false
+        )
+        let alert = SCLAlertView(appearance: appearance)
+        
+        alert.addButton("Done", action: {
+            self.captureSession.startRunning()
+            alert.hideView()
+        })
+        
         //convert the data to a string
         let data = qrJSON.data(using: String.Encoding.utf8)
         do {
@@ -76,6 +86,7 @@ class HomeViewController: UIViewController, AVCaptureMetadataOutputObjectsDelega
                 print("invalid data from QR")
             }
         } catch let error as NSError {
+            alert.showError("Error", subTitle: "Invalid QR Code")
             print(error)
         }
     }
@@ -116,7 +127,26 @@ class HomeViewController: UIViewController, AVCaptureMetadataOutputObjectsDelega
     }
     
     func eventEnroll(jsonArr: [Dictionary<String,Any>]){
+        let appearance = SCLAlertView.SCLAppearance(
+            showCloseButton: false
+        )
+        let alert = SCLAlertView(appearance: appearance)
+        
+        alert.addButton("Done", action: {
+            self.captureSession.startRunning()
+            alert.hideView()
+        })
+        
         //check the user into the event
+        
+        guard let event_id = jsonArr[0]["event_id"] as? String else {
+            alert.showError("Error", subTitle: "Invalid QR Code")
+            return
+        }
+        guard let org_id = jsonArr[0]["org_id"] as? String else {
+            alert.showError("Error", subTitle: "Invalid QR Code")
+            return
+        }
         
         //create the new checkIn in our database
         parameters = [
@@ -124,9 +154,9 @@ class HomeViewController: UIViewController, AVCaptureMetadataOutputObjectsDelega
             "first_name": Data.sharedInstance.userData[1],
             "last_name": Data.sharedInstance.userData[2],
             "phone": Data.sharedInstance.userData[3],
-            "event_id": jsonArr[0]["event_id"]!,
-            "org_id": jsonArr[0]["org_id"]!,
-            "point_categories": jsonArr[0]["point_categories"]!
+            "event_id": event_id,
+            "org_id": org_id,
+            "point_categories": jsonArr[0]["point_categories"] as Any
         ]
         eventName = jsonArr[0]["event_name"] as? String
         

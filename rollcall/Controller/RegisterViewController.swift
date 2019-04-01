@@ -29,6 +29,7 @@ class RegisterViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
     @IBOutlet weak var yearPicker: UIPickerView!
     let yearArr = ["Freshman", "Sophomore", "Junior", "Senior", "Graduate"]
     var year : String?
+    @IBOutlet weak var registerButton: UIButton!
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
@@ -48,6 +49,8 @@ class RegisterViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        registerButton.layer.cornerRadius = 8
 
         emailField.placeholder = Data.sharedInstance.userData[0]
         emailField.isUserInteractionEnabled = false

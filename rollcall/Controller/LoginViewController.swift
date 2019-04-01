@@ -15,13 +15,11 @@ class ViewController: UIViewController {
     let ONBOARD_URL = "http://rollcall-api.herokuapp.com/api/user/onboardcheck/"
     //let ONBOARD_URL = "http://localhost:8080/api/user/onboardcheck/"
     let sessionManager = SessionManager()
-    
-    //var accessToken : String?
-    //var userData : [String] = []
+    @IBOutlet weak var signInButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        signInButton.layer.cornerRadius = 8
     }
 
     @IBAction func signIn(_ sender: UIButton) {

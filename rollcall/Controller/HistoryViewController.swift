@@ -16,12 +16,6 @@ struct orgData{
     var points = [Dictionary<String, Any>]()
 }
 
-struct eventData{
-    var opened = Bool()
-    var name = String()
-    var eventData = [String : Any]()
-}
-
 class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     
@@ -141,7 +135,16 @@ class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewD
             let row = indexPath.row - 2
             let name = historyData[indexPath.section].events[row]["name"] as? String
 
-            let date = historyData[indexPath.section].events[row]["date"] as? String
+            let dateString = historyData[indexPath.section].events[row]["date"] as? String
+            let formatter = DateFormatter()
+            formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZZZZZ"
+            let date = formatter.date(from: dateString!)
+            
+            formatter.dateFormat = "MM"
+            let month = formatter.string(from: date!)
+            formatter.dateFormat = "dd"
+            let day = formatter.string(from: date!)
+
             let location = historyData[indexPath.section].events[row]["location"] as? String
             //get the points categories
 
@@ -156,7 +159,7 @@ class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewD
                 }
             }
             point_des.append(" point(s)")
-            let details = date! + ", " + location! + ", " + point_des
+            let details = month + "/" + day + ", " + location! + ", " + point_des
             
             cell.setInfo(n: name!, d: details)
             return cell

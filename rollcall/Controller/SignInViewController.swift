@@ -221,7 +221,7 @@ class HomeViewController: UIViewController, AVCaptureMetadataOutputObjectsDelega
                 default:
                     let json = response.result.value as? [String: Any]
                     checkInMess = json?["message"] as? String
-                    alert.showError("uh oh", subTitle: checkInMess ?? "")
+                    alert.showError("uh oh", subTitle: checkInMess ?? "There has been an error. Please try again later.")
                 }
                 
             }

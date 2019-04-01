@@ -209,7 +209,7 @@ class HomeViewController: UIViewController, AVCaptureMetadataOutputObjectsDelega
                 if(i % 2 != 0){
                     let text = additionalQA[i - 1] as? String
                     let textField = additionalQA[i] as? UITextField
-                    self.additionalQ.append(["question": text!, "response": textField!.text])
+                    self.additionalQ.append(["question": text!, "response": textField!.text as Any])
                 }
             }
             self.checkInWithAddFields()

@@ -15,9 +15,10 @@ import SCLAlertView
 class HomeViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate, CLLocationManagerDelegate {
 
     //let CHECKIN_URL = "http://localhost:8080/api/event/checkIn"
-    let CHECKIN_URL = "http://Samanthas-MacBook-Pro-2.local:8080/api/event/checkIn"
-    //let CHECKIN_URL = "http://rollcall-api.herokuapp.com/api/event/checkIn"
-    let ADDBOARD_URL = "http://Samanthas-MacBook-Pro-2.local:8080/api/org/addBoard"
+    //let CHECKIN_URL = "http://Samanthas-MacBook-Pro-2.local:8080/api/event/checkIn"
+    let CHECKIN_URL = "http://rollcall-api.herokuapp.com/api/event/checkIn"
+    //let ADDBOARD_URL = "http://Samanthas-MacBook-Pro-2.local:8080/api/org/addBoard"
+    let ADDBOARD_URL = "http://rollcall-api.herokuapp.com/api/org/addBoard"
     let sessionManager = SessionManager()
     
     @IBOutlet weak var welcomeMessage: UILabel!

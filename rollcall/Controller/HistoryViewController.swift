@@ -24,7 +24,8 @@ class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     var historyData = [orgData]()
     
-    let GET_HISTORY_URL = "http://Samanthas-MacBook-Pro-2.local:8080/api/user/history/"
+    //let GET_HISTORY_URL = "http://Samanthas-MacBook-Pro-2.local:8080/api/user/history/"
+    let GET_HISTORY_URL = "http://rollcall-api.herokuapp.com/api/user/history/"
     let sessionManager = SessionManager()
     
     override func viewDidLoad() {
@@ -158,7 +159,12 @@ class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewD
                     point_des.append(", ")
                 }
             }
-            point_des.append(" point(s)")
+            if(points.isEmpty){
+                point_des.append("0 point(s)")
+            }
+            else{
+                point_des.append(" point(s)")
+            }
             let details = month + "/" + day + ", " + location! + ", " + point_des
             
             cell.setInfo(n: name!, d: details)

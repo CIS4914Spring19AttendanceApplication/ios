@@ -7,10 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		31BE12282200CBC200666475 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31BE12272200CBC200666475 /* HomeViewController.swift */; };
+		3103B9BC225035C3008E0036 /* OrganizationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3103B9BB225035C3008E0036 /* OrganizationCell.swift */; };
+		3103B9BF225040E3008E0036 /* HeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3103B9BE225040E3008E0036 /* HeaderCell.swift */; };
+		3103B9C1225042E5008E0036 /* EventCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3103B9C0225042E5008E0036 /* EventCell.swift */; };
+		3103B9C3225043FF008E0036 /* PointsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3103B9C2225043FF008E0036 /* PointsCell.swift */; };
+		315D7026223AD67C0032352E /* HistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 315D7025223AD67C0032352E /* HistoryViewController.swift */; };
+		315D7028223AF4930032352E /* SharedData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 315D7027223AF4930032352E /* SharedData.swift */; };
+		31875CC3221E4DA1009C3E3C /* rollcall.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 31875CC1221E4DA1009C3E3C /* rollcall.xcdatamodeld */; };
+		31875CC5221F38EA009C3E3C /* APIHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31875CC4221F38EA009C3E3C /* APIHelper.swift */; };
+		31BE12282200CBC200666475 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31BE12272200CBC200666475 /* SignInViewController.swift */; };
 		31BE122B2202040E00666475 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31BE122A2202040E00666475 /* RegisterViewController.swift */; };
 		31D1614721F8D20B00DE7A5E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31D1614621F8D20B00DE7A5E /* AppDelegate.swift */; };
-		31D1614921F8D20B00DE7A5E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31D1614821F8D20B00DE7A5E /* ViewController.swift */; };
+		31D1614921F8D20B00DE7A5E /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31D1614821F8D20B00DE7A5E /* LoginViewController.swift */; };
 		31D1614C21F8D20B00DE7A5E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 31D1614A21F8D20B00DE7A5E /* Main.storyboard */; };
 		31D1614E21F8D21100DE7A5E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 31D1614D21F8D21100DE7A5E /* Assets.xcassets */; };
 		31D1615121F8D21100DE7A5E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 31D1614F21F8D21100DE7A5E /* LaunchScreen.storyboard */; };
@@ -21,11 +29,19 @@
 
 /* Begin PBXFileReference section */
 		1F948D982CB1A9D55706D56C /* Pods-rollcall.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-rollcall.debug.xcconfig"; path = "Pods/Target Support Files/Pods-rollcall/Pods-rollcall.debug.xcconfig"; sourceTree = "<group>"; };
-		31BE12272200CBC200666475 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		3103B9BB225035C3008E0036 /* OrganizationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrganizationCell.swift; sourceTree = "<group>"; };
+		3103B9BE225040E3008E0036 /* HeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderCell.swift; sourceTree = "<group>"; };
+		3103B9C0225042E5008E0036 /* EventCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCell.swift; sourceTree = "<group>"; };
+		3103B9C2225043FF008E0036 /* PointsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointsCell.swift; sourceTree = "<group>"; };
+		315D7025223AD67C0032352E /* HistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryViewController.swift; sourceTree = "<group>"; };
+		315D7027223AF4930032352E /* SharedData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedData.swift; sourceTree = "<group>"; };
+		31875CC2221E4DA1009C3E3C /* rollcall.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = rollcall.xcdatamodel; sourceTree = "<group>"; };
+		31875CC4221F38EA009C3E3C /* APIHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIHelper.swift; sourceTree = "<group>"; };
+		31BE12272200CBC200666475 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		31BE122A2202040E00666475 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		31D1614321F8D20B00DE7A5E /* rollcall.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = rollcall.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		31D1614621F8D20B00DE7A5E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		31D1614821F8D20B00DE7A5E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		31D1614821F8D20B00DE7A5E /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		31D1614B21F8D20B00DE7A5E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		31D1614D21F8D21100DE7A5E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		31D1615021F8D21100DE7A5E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -49,14 +65,47 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		31BE122C220211E400666475 /* Controllers */ = {
+		3103B9BD225035D9008E0036 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
-				31BE12272200CBC200666475 /* HomeViewController.swift */,
-				31BE122A2202040E00666475 /* RegisterViewController.swift */,
-				31D1614821F8D20B00DE7A5E /* ViewController.swift */,
+				3103B9BB225035C3008E0036 /* OrganizationCell.swift */,
+				3103B9BE225040E3008E0036 /* HeaderCell.swift */,
+				3103B9C0225042E5008E0036 /* EventCell.swift */,
+				3103B9C2225043FF008E0036 /* PointsCell.swift */,
 			);
-			path = Controllers;
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		31AE7ADC223D47AB00A9132B /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				315D7027223AF4930032352E /* SharedData.swift */,
+				31875CC4221F38EA009C3E3C /* APIHelper.swift */,
+				31875CC1221E4DA1009C3E3C /* rollcall.xcdatamodeld */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		31AE7ADD223D47C600A9132B /* View */ = {
+			isa = PBXGroup;
+			children = (
+				31D1614D21F8D21100DE7A5E /* Assets.xcassets */,
+				31D1614F21F8D21100DE7A5E /* LaunchScreen.storyboard */,
+				31D1614A21F8D20B00DE7A5E /* Main.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		31BE122C220211E400666475 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				3103B9BD225035D9008E0036 /* Cells */,
+				31BE12272200CBC200666475 /* SignInViewController.swift */,
+				31BE122A2202040E00666475 /* RegisterViewController.swift */,
+				31D1614821F8D20B00DE7A5E /* LoginViewController.swift */,
+				315D7025223AD67C0032352E /* HistoryViewController.swift */,
+			);
+			path = Controller;
 			sourceTree = "<group>";
 		};
 		31D1613A21F8D20B00DE7A5E = {
@@ -80,11 +129,10 @@
 		31D1614521F8D20B00DE7A5E /* rollcall */ = {
 			isa = PBXGroup;
 			children = (
-				31BE122C220211E400666475 /* Controllers */,
+				31AE7ADD223D47C600A9132B /* View */,
+				31AE7ADC223D47AB00A9132B /* Model */,
+				31BE122C220211E400666475 /* Controller */,
 				31D1614621F8D20B00DE7A5E /* AppDelegate.swift */,
-				31D1614A21F8D20B00DE7A5E /* Main.storyboard */,
-				31D1614D21F8D21100DE7A5E /* Assets.xcassets */,
-				31D1614F21F8D21100DE7A5E /* LaunchScreen.storyboard */,
 				31D1615221F8D21100DE7A5E /* Info.plist */,
 				31D1615821F8D5C600DE7A5E /* Auth0.plist */,
 			);
@@ -188,14 +236,19 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-rollcall/Pods-rollcall-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/Auth0/Auth0.framework",
+				"${BUILT_PRODUCTS_DIR}/SCLAlertView/SCLAlertView.framework",
 				"${BUILT_PRODUCTS_DIR}/SimpleKeychain/SimpleKeychain.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 			);
 			outputPaths = (
+
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Auth0.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SCLAlertView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SimpleKeychain.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -232,9 +285,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				31D1614921F8D20B00DE7A5E /* ViewController.swift in Sources */,
+				31875CC5221F38EA009C3E3C /* APIHelper.swift in Sources */,
+				31D1614921F8D20B00DE7A5E /* LoginViewController.swift in Sources */,
 				31D1614721F8D20B00DE7A5E /* AppDelegate.swift in Sources */,
-				31BE12282200CBC200666475 /* HomeViewController.swift in Sources */,
+				3103B9BC225035C3008E0036 /* OrganizationCell.swift in Sources */,
+				31875CC3221E4DA1009C3E3C /* rollcall.xcdatamodeld in Sources */,
+				315D7028223AF4930032352E /* SharedData.swift in Sources */,
+				3103B9C1225042E5008E0036 /* EventCell.swift in Sources */,
+				3103B9BF225040E3008E0036 /* HeaderCell.swift in Sources */,
+				3103B9C3225043FF008E0036 /* PointsCell.swift in Sources */,
+				31BE12282200CBC200666475 /* SignInViewController.swift in Sources */,
+				315D7026223AD67C0032352E /* HistoryViewController.swift in Sources */,
 				31BE122B2202040E00666475 /* RegisterViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -382,6 +443,9 @@
 			baseConfigurationReference = 1F948D982CB1A9D55706D56C /* Pods-rollcall.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = FMKC8L888F;
 				INFOPLIST_FILE = rollcall/Info.plist;
@@ -391,8 +455,11 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = seniorproject.rollcall;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+        
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
+
 			};
 			name = Debug;
 		};
@@ -401,6 +468,9 @@
 			baseConfigurationReference = 4917793ADFA2BF55164FC1A2 /* Pods-rollcall.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+        
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = FMKC8L888F;
 				INFOPLIST_FILE = rollcall/Info.plist;
@@ -410,8 +480,10 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = seniorproject.rollcall;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
@@ -437,6 +509,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		31875CC1221E4DA1009C3E3C /* rollcall.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				31875CC2221E4DA1009C3E3C /* rollcall.xcdatamodel */,
+			);
+			currentVersion = 31875CC2221E4DA1009C3E3C /* rollcall.xcdatamodel */;
+			path = rollcall.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 31D1613B21F8D20B00DE7A5E /* Project object */;
 }

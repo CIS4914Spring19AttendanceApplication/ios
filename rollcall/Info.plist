@@ -35,6 +35,29 @@
 	<string>1</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+		<key>NSExceptionDomains</key>
+		<dict>
+			<key>example.com</key>
+			<dict>
+				<key>NSExceptionAllowsInsecureHTTPLoads</key>
+				<true/>
+				<key>NSIncludesSubdomains</key>
+				<true/>
+			</dict>
+		</dict>
+	</dict>
+	<key>NSCameraUsageDescription</key>
+	<string>$(PRODUCT_NAME) camera is needed to scan QR code to sign in</string>
+	<key>NSLocationUsageDescription</key>
+	<string>$(PRODUCT_NAME) requires location to ensure sign in accuracy</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string></string>
+
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
@@ -46,8 +69,7 @@
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
-		<string>UIInterfaceOrientationLandscapeLeft</string>
-		<string>UIInterfaceOrientationLandscapeRight</string>
+
 	</array>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>

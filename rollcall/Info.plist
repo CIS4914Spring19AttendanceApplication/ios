@@ -35,6 +35,7 @@
 	<string>1</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSAllowsArbitraryLoads</key>
@@ -56,6 +57,7 @@
 	<string>$(PRODUCT_NAME) requires location to ensure sign in accuracy</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string></string>
+
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
@@ -67,6 +69,7 @@
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
+
 	</array>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>

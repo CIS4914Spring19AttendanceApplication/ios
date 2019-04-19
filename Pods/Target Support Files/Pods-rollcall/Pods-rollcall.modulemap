@@ -1,0 +1,6 @@
+framework module Pods_rollcall {
+  umbrella header "Pods-rollcall-umbrella.h"
+
+  export *
+  module * { export * }
+}
